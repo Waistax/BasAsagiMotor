@@ -8,7 +8,10 @@ package başaşağıderebeyi.motor;
 /** Motorun kalbi */
 public class Motor {
 	/** Sürüm */
-	public static final String SÜRÜM = "0.1";
+	public static final String SÜRÜM = "0.2";
+	/** Aktif uygulama
+	 * Bu değişken motor başladıktan sonra sabit kalmalıdır. */
+	public static Uygulama uygulama;
 	/** Hedeflenen saniye başına kare oranı.
 	 * Eğer bu değer sıfır ise motor elinden geldiğince hızlı çalışır. */
 	public static float hedefKareOranı;
@@ -49,7 +52,7 @@ public class Motor {
 	public static void çalış() {
 		try {
 			// Yükle
-			
+			uygulama.yükle();
 			// Ana döngüyü başlat
 			float öncekiZaman = zaman();
 			float saniyeSayacı = 0.0F;
@@ -83,12 +86,18 @@ public class Motor {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			// Kaydet
+			uygulama.kaydet();
 			System.exit(0);
 		}
 	}
 	
 	/** Kareyi işler */
 	private static void kare() {
-		
+		uygulama.kare();
 	}
+	
+	/** Gizli tanımlayıcı
+	 * Bu sınıfın bir nesnesini oluşturmayı engeller. */
+	private Motor() {}
 }
