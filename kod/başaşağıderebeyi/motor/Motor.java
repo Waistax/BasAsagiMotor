@@ -8,7 +8,7 @@ package başaşağıderebeyi.motor;
 /** Motorun kalbi */
 public class Motor {
 	/** Sürüm */
-	public static final String SÜRÜM = "0.5";
+	public static final String SÜRÜM = "0.6";
 	/** Aktif görselleştirici
 	 * Bu değişken motor başladıktan sonra sabit kalmalıdır. */
 	public static Görselleştirici görselleştirici;
