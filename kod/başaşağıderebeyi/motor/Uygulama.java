@@ -13,6 +13,9 @@ public interface Uygulama {
 	/** Uygulamayı kaydeder */
 	void kaydet();
 
-	/** Uygulamayı günceller ve çizer */
+	/** Uygulamayı her kare günceller ve çizer */
 	void kare();
+	
+	/** Uygullamayı her saniye günceller */
+	void saniye();
 }
