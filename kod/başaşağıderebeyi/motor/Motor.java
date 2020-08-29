@@ -8,7 +8,10 @@ package başaşağıderebeyi.motor;
 /** Motorun kalbi */
 public class Motor {
 	/** Sürüm */
-	public static final String SÜRÜM = "0.3";
+	public static final String SÜRÜM = "0.4";
+	/** Aktif görselleştirici
+	 * Bu değişken motor başladıktan sonra sabit kalmalıdır. */
+	public static Görselleştirici görselleştirici;
 	/** Aktif uygulama
 	 * Bu değişken motor başladıktan sonra sabit kalmalıdır. */
 	public static Uygulama uygulama;
@@ -52,6 +55,7 @@ public class Motor {
 	public static void çalış() {
 		try {
 			// Yükle
+			görselleştirici.oluştur();
 			uygulama.yükle();
 			// Ana döngüyü başlat
 			float öncekiZaman = zaman();
@@ -86,6 +90,8 @@ public class Motor {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			// Temizle
+			görselleştirici.yokEt();
 			// Kaydet
 			uygulama.kaydet();
 			System.exit(0);
@@ -94,7 +100,9 @@ public class Motor {
 	
 	/** Kareyi işler */
 	private static void kare() {
+		görselleştirici.girdi().kare();
 		uygulama.kare();
+		görselleştirici.görselleştir();
 	}
 	
 	/** Gizli tanımlayıcı
