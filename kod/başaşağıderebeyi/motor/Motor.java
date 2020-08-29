@@ -8,7 +8,7 @@ package başaşağıderebeyi.motor;
 /** Motorun kalbi */
 public class Motor {
 	/** Sürüm */
-	public static final String SÜRÜM = "0.4";
+	public static final String SÜRÜM = "0.5";
 	/** Aktif görselleştirici
 	 * Bu değişken motor başladıktan sonra sabit kalmalıdır. */
 	public static Görselleştirici görselleştirici;
@@ -100,9 +100,9 @@ public class Motor {
 	
 	/** Kareyi işler */
 	private static void kare() {
-		görselleştirici.girdi().kare();
+		görselleştirici.girdiyiAl().kare();
 		uygulama.kare();
-		görselleştirici.görselleştir();
+		görselleştirici.göster();
 	}
 	
 	/** Gizli tanımlayıcı

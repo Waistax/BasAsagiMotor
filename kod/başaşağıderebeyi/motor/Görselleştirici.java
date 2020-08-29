@@ -17,9 +17,9 @@ public interface Görselleştirici {
 	
 	/** Çizilen veriyi görselleştir
 	 * Uygulama karesi çizildikten sonra çağırılır. */
-	void görselleştir();
+	void göster();
 	
 	/** Kütüphanenin girdisini dönder
 	 * Bu girdideki tuş ve düğme sayısı pencere kütüphanesine bağlı olur. */
-	Girdi girdi();
+	Girdi girdiyiAl();
 }
