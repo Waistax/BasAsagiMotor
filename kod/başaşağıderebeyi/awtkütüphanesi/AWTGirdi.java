@@ -9,9 +9,7 @@ import başaşağıderebeyi.motor.*;
 
 import java.awt.event.*;
 
-/** Java AWT kütüphanesinin girdilerini halleder */
 public class AWTGirdi extends Girdi implements KeyListener, MouseListener, MouseWheelListener, MouseMotionListener {
-	/** Varsayılan tuş sayısına tanımlar */
 	public AWTGirdi() {
 		super(256, 8);
 	}

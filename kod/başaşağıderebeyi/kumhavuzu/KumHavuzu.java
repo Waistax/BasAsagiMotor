@@ -11,14 +11,10 @@ import başaşağıderebeyi.motor.*;
 import java.awt.*;
 import java.awt.event.*;
 
-/** Motoru test eder */
 public class KumHavuzu implements Uygulama {
-	/** Kum havuzu nesnesi */
 	public static final KumHavuzu KUM_HAVUZU = new KumHavuzu();
 	
-	/** Testing başlangıcı */
 	public static void main(String[] args) {
-		// Görselleştiriciyi ve uygulamayı ayarla
 		Motor.görselleştirici = KUM_HAVUZU.görselleştirici;
 		Motor.uygulama = KUM_HAVUZU;
 		Motor.başla();
@@ -42,7 +38,6 @@ public class KumHavuzu implements Uygulama {
 		sayaç = 0;
 		xkon = 10;
 		yazmaSüreci = new Süreç();
-		// Yazı tipini ve rengini ayarla
 		çizer.setFont(new Font("Verdena", Font.ITALIC, 20));
 		çizer.setColor(new Color(1.0F, 1.0F, 0.6F, 1.0F));
 	}

@@ -5,17 +5,12 @@
  */
 package başaşağıderebeyi.motor;
 
-/** Uygulamaları motora sağlayan arayüz */
 public interface Uygulama {
-	/** Uygulamayı yükler */
 	void yükle();
 
-	/** Uygulamayı kaydeder */
 	void kaydet();
 
-	/** Uygulamayı her kare günceller ve çizer */
 	void kare();
 	
-	/** Uygullamayı her saniye günceller */
 	void saniye();
 }
