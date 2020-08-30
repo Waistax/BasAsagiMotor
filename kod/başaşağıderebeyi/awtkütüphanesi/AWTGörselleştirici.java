@@ -29,7 +29,7 @@ public class AWTGörselleştirici implements Görselleştirici {
 	public Canvas tuval;
 	public BufferStrategy çizimTamponu;
 	public Graphics2D çizer;
-
+	
 	@Override
 	public void oluştur() {
 		if (çerçeve != null)
@@ -64,7 +64,7 @@ public class AWTGörselleştirici implements Görselleştirici {
 		çizer = (Graphics2D)çizimTamponu.getDrawGraphics();
 		kenarYumuşatmayıAyarla();
 	}
-
+	
 	@Override
 	public void yokEt() {
 		if (çerçeve == null)
@@ -75,13 +75,13 @@ public class AWTGörselleştirici implements Görselleştirici {
 		tuval = null;
 		çerçeve = null;
 	}
-
+	
 	@Override
 	public void göster() {
 		çizimTamponu.show();
 		çizer.clearRect(0, 0, boyut.x, boyut.y);
 	}
-
+	
 	@Override
 	public Girdi girdiyiAl() {
 		return girdi;

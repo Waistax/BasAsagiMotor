@@ -7,9 +7,9 @@ package başaşağıderebeyi.motor;
 
 public interface Uygulama {
 	void yükle();
-
+	
 	void kaydet();
-
+	
 	void kare();
 	
 	void saniye();

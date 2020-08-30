@@ -22,7 +22,7 @@ public class Girdi {
 	
 	public int kaydırma;
 	public int kaydırmaGirdisi;
-
+	
 	public Girdi(int tuşlar, int düğmeler) {
 		this.tuşlar = tuşlar;
 		this.düğmeler = düğmeler;
@@ -36,7 +36,7 @@ public class Girdi {
 		imleçDeğişimi = new Vektör2t();
 		imleçGirdisi = new Vektör2t();
 	}
-
+	
 	public void kare() {
 		for (int i = 0; i < tuşlar; i++) {
 			tuşBasıldı[i] = !tuşAşağı[i] && tuşGirdisi[i];

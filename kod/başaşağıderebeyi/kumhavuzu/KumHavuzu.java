@@ -41,10 +41,11 @@ public class KumHavuzu implements Uygulama {
 		çizer.setFont(new Font("Verdena", Font.ITALIC, 20));
 		çizer.setColor(new Color(1.0F, 1.0F, 0.6F, 1.0F));
 	}
-
+	
 	@Override
-	public void kaydet() {}
-
+	public void kaydet() {
+	}
+	
 	@Override
 	public void kare() {
 		try {

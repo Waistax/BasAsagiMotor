@@ -17,11 +17,11 @@ public class Motor {
 	public static boolean çalışmakta;
 	public static float kareOranı;
 	public static float işlenmemişKareler;
-
+	
 	public static float zaman() {
 		return (float)System.nanoTime();
 	}
-
+	
 	public static void başla() {
 		if (çalışmakta)
 			return;
@@ -48,11 +48,9 @@ public class Motor {
 					kare();
 					kareler++;
 					işlenmemişKareler = 0.0F;
-				} else {
-					for (işlenmemişKareler += geçenZaman * hedefKareOranı;
-							işlenmemişKareler >= 1.0F;işlenmemişKareler--, kareler++)
+				} else
+					for (işlenmemişKareler += geçenZaman * hedefKareOranı; işlenmemişKareler >= 1.0F; işlenmemişKareler--, kareler++)
 						kare();
-				}
 				if ((saniyeSayacı += geçenZaman) >= 1.0F) {
 					kareOranı = kareler / saniyeSayacı;
 					UYGULAMA_SÜRECİ.hesapla();
@@ -89,5 +87,6 @@ public class Motor {
 		GÖSTERME_SÜRECİ.dur();
 	}
 	
-	private Motor() {}
+	private Motor() {
+	}
 }
