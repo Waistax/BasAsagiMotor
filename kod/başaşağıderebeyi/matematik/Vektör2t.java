@@ -9,15 +9,15 @@ public class Vektör2t {
 	public int x;
 	public int y;
 	
+	public Vektör2t() {
+	}
+	
 	public Vektör2t(int x, int y) {
 		yaz(x, y);
 	}
 	
 	public Vektör2t(Vektör2t v) {
 		yaz(v);
-	}
-	
-	public Vektör2t() {
 	}
 	
 	public Vektör2t yaz(int x, int y) {

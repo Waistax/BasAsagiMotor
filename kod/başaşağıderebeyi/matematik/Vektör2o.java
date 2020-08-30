@@ -9,15 +9,15 @@ public class Vektör2o {
 	public float x;
 	public float y;
 	
+	public Vektör2o() {
+	}
+	
 	public Vektör2o(float x, float y) {
 		yaz(x, y);
 	}
 	
 	public Vektör2o(Vektör2o v) {
 		yaz(v);
-	}
-	
-	public Vektör2o() {
 	}
 	
 	public Vektör2o yaz(float x, float y) {
