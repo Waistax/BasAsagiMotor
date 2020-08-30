@@ -44,15 +44,17 @@ public class KumHavuzu implements Uygulama {
 		kütük = new Kütük();
 		çizer.setFont(new Font("Verdena", Font.ITALIC, 20));
 		çizer.setColor(new Color(1.0F, 1.0F, 0.6F, 1.0F));
-		kütük.ekle("kh:0", 10, Object.class);
-		kütük.ekle("kh:1", "Selam", Object.class);
-		kütük.ekle("kh:2", 'C', Object.class);
-		kütük.ekle("kh:3", 45.7, Object.class);
-		kütük.ekle("kh:4", 42);
+		kütük.bağla("kh:0", 10, Object.class);
+		kütük.bağla("kh:1", "Selam", Object.class);
+		kütük.bağla("kh:2", 'C', Object.class);
+		kütük.bağla("kh:3", 45.7, Object.class);
+		kütük.bağla("kh:4", 42);
+		kütük.sal("kh:2");
 		Map<Tanımlayıcı, Object> nesneKütüğü = kütük.haritaAl(Object.class);
 		Map<Tanımlayıcı, Integer> sayıKütüğü = kütük.haritaAl(Integer.class);
 		for (Tanımlayıcı tanımlayıcı : nesneKütüğü.keySet())
 			System.out.println("Nesne " + tanımlayıcı + " " + nesneKütüğü.get(tanımlayıcı));
+		kütük.yenidenBağla("kh:3", 46);
 		for (Tanımlayıcı tanımlayıcı : sayıKütüğü.keySet())
 			System.out.println("Sayı " + tanımlayıcı + " " + sayıKütüğü.get(tanımlayıcı));
 	}

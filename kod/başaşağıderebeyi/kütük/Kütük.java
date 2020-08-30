@@ -71,23 +71,63 @@ public class Kütük {
 		return (Map<Tanımlayıcı, T>)vahşiHarita;
 	}
 	
-	public <T> boolean ekle(String kimlik, T t) {
-		Tanımlayıcı tanımlayıcı = tanımlayıcıOluştur(kimlik);
-		if (tanımlayıcı == null)
-			return false;
+	public <T> boolean bağla(Tanımlayıcı tanımlayıcı, T t) {
 		haritaOluştur((Class<T>)t.getClass()).put(tanımlayıcı, t);
 		return true;
 	}
 	
-	public <T> boolean ekle(String kimlik, T t, Class<T> değerTürü) {
+	public <T> boolean bağla(String kimlik, T t) {
 		Tanımlayıcı tanımlayıcı = tanımlayıcıOluştur(kimlik);
 		if (tanımlayıcı == null)
 			return false;
+		return bağla(tanımlayıcı, t);
+	}
+	
+	public <T> boolean yenidenBağla(String kimlik, T t) {
+		Tanımlayıcı tanımlayıcı = tanımlayıcıAl(kimlik);
+		if (tanımlayıcı == null)
+			return false;
+		if (!sal(tanımlayıcı))
+			return false;
+		return bağla(tanımlayıcı, t);
+	}
+	
+	public <T> boolean bağla(Tanımlayıcı tanımlayıcı, T t, Class<T> değerTürü) {
 		haritaOluştur(değerTürü).put(tanımlayıcı, t);
 		return true;
 	}
 	
-	public <T> T al(String kimlik, Class<T> değerTürü) {
+	public <T> boolean bağla(String kimlik, T t, Class<T> değerTürü) {
+		Tanımlayıcı tanımlayıcı = tanımlayıcıOluştur(kimlik);
+		if (tanımlayıcı == null)
+			return false;
+		return bağla(tanımlayıcı, t, değerTürü);
+	}
+	
+	public <T> boolean yenidenBağla(String kimlik, T t, Class<T> değerTürü) {
+		Tanımlayıcı tanımlayıcı = tanımlayıcıAl(kimlik);
+		if (tanımlayıcı == null)
+			return false;
+		if (!sal(tanımlayıcı))
+			return false;
+		return bağla(tanımlayıcı, t, değerTürü);
+	}
+	
+	public boolean sal(Tanımlayıcı tanımlayıcı) {
+		for (Class<?> girdiTürü : haritalar.keySet())
+			if (haritalar.get(girdiTürü).remove(tanımlayıcı) != null)
+				return true;
+		return false;
+	}
+	
+	public boolean sal(String kimlik) {
+		Tanımlayıcı tanımlayıcı = tanımlayıcıAl(kimlik);
+		if (tanımlayıcı != null)
+			return sal(tanımlayıcı);
+		return false;
+	}
+	
+	public <T> T ara(String kimlik, Class<T> değerTürü) {
 		Tanımlayıcı tanımlayıcı = tanımlayıcıAl(kimlik);
 		if (tanımlayıcı == null)
 			return null;
