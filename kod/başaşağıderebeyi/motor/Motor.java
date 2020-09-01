@@ -56,10 +56,6 @@ public class Motor {
 					UYGULAMA_SÜRECİ.hesapla();
 					GİRDİ_SÜRECİ.hesapla();
 					GÖSTERME_SÜRECİ.hesapla();
-					System.out.println("Kare Oranı: " + kareOranı);
-					System.out.println("Uygulama: " + UYGULAMA_SÜRECİ.ortalamayıAl() + "ms");
-					System.out.println("Girdi: " + GİRDİ_SÜRECİ.ortalamayıAl() + "ms");
-					System.out.println("Gösterme: " + GÖSTERME_SÜRECİ.ortalamayıAl() + "ms");
 					kareler = 0;
 					saniyeSayacı--;
 					uygulama.saniye();
