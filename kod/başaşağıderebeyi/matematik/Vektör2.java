@@ -20,10 +20,18 @@ public class Vektör2 {
 		yaz(v);
 	}
 	
-	public Vektör2 yaz(float x, float y) {
+	public Vektör2 yazX(float x) {
 		this.x = x;
+		return this;
+	}
+	
+	public Vektör2 yazY(float y) {
 		this.y = y;
 		return this;
+	}
+	
+	public Vektör2 yaz(float x, float y) {
+		return yazX(x).yazY(y);
 	}
 	
 	public Vektör2 yaz(Vektör2 v) {
