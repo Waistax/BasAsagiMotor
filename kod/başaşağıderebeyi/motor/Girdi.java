@@ -16,9 +16,9 @@ public class Girdi {
 	public final boolean[] düğmeAşağı;
 	public final boolean[] düğmeBasıldı;
 	public final boolean[] düğmeGirdisi;
-	public final Vektör2t imleç;
-	public final Vektör2t imleçDeğişimi;
-	public final Vektör2t imleçGirdisi;
+	public final Vektör2 imleç;
+	public final Vektör2 imleçDeğişimi;
+	public final Vektör2 imleçGirdisi;
 	
 	public int kaydırma;
 	public int kaydırmaGirdisi;
@@ -32,9 +32,9 @@ public class Girdi {
 		düğmeAşağı = new boolean[düğmeler];
 		düğmeBasıldı = new boolean[düğmeler];
 		düğmeGirdisi = new boolean[düğmeler];
-		imleç = new Vektör2t();
-		imleçDeğişimi = new Vektör2t();
-		imleçGirdisi = new Vektör2t();
+		imleç = new Vektör2();
+		imleçDeğişimi = new Vektör2();
+		imleçGirdisi = new Vektör2();
 	}
 	
 	public void kare() {

@@ -6,7 +6,7 @@
 package başaşağıderebeyi.motor;
 
 public class Motor {
-	public static final String SÜRÜM = "0.12";
+	public static final String SÜRÜM = "0.13";
 	public static final Süreç UYGULAMA_SÜRECİ = new Süreç();
 	public static final Süreç GİRDİ_SÜRECİ = new Süreç();
 	public static final Süreç GÖSTERME_SÜRECİ = new Süreç();

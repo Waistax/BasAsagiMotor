@@ -18,7 +18,7 @@ import javax.swing.*;
 
 public class AWTGörselleştirici implements Görselleştirici {
 	public String başlık = "Baş Aşağı Motor srm. " + Motor.SÜRÜM;
-	public Vektör2t boyut = new Vektör2t(16 * 50, 9 * 50);
+	public Vektör2 boyut = new Vektör2(16.0F * 50.0F, 9.0F * 50.0F).yuvarla();
 	public int tamponSayısı = 3;
 	public boolean kenarYumuşatma = true;
 	public Color arkaplanRengi = new Color(0.2F, 0.2F, 0.2F, 1.0F);
@@ -36,7 +36,7 @@ public class AWTGörselleştirici implements Görselleştirici {
 			return;
 		çerçeve = new JFrame(başlık);
 		tuval = new Canvas();
-		Dimension boyut = new Dimension(this.boyut.x, this.boyut.y);
+		Dimension boyut = new Dimension((int)this.boyut.x, (int)this.boyut.y);
 		tuval.setMaximumSize(boyut);
 		tuval.setMinimumSize(boyut);
 		tuval.setPreferredSize(boyut);
@@ -79,7 +79,7 @@ public class AWTGörselleştirici implements Görselleştirici {
 	@Override
 	public void göster() {
 		çizimTamponu.show();
-		çizer.clearRect(0, 0, boyut.x, boyut.y);
+		çizer.clearRect(0, 0, (int)boyut.x, (int)boyut.y);
 	}
 	
 	@Override
