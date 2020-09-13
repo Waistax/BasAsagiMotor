@@ -96,7 +96,7 @@ public class Dikdörtgen2 {
 	}
 	
 	public boolean içinde(Vektör2 v) {
-		return k.x < v.x && k.y < v.y && b.x > v.x && b.y > v.y;
+		return k.x <= v.x && k.y <= v.y && b.x >= v.x && b.y >= v.y;
 	}
 	
 	@Override
