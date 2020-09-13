@@ -95,6 +95,10 @@ public class Dikdörtgen2 {
 		return eşittir(d.k, d.b);
 	}
 	
+	public boolean içinde(Vektör2 v) {
+		return k.x < v.x && k.y < v.y && b.x > v.x && b.y > v.y;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		return eşittir((Dikdörtgen2)obj);
