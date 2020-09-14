@@ -83,6 +83,14 @@ public class Dikdörtgen2 {
 		return araDeğer(this, d, uzaklık, yakınlık);
 	}
 	
+	public Dikdörtgen2 ortala(Dikdörtgen2 d) {
+		Vektör2 boyut = new Vektör2().çıkar(b, k);
+		Vektör2 dBoyut = new Vektör2().çıkar(d.b, d.k);
+		k.çıkar(dBoyut, boyut).böl(2.0F);
+		b.topla(k, boyut);
+		return this;
+	}
+	
 	public boolean eşittir(float kx, float ky, float bx, float by) {
 		return k.eşittir(kx, ky) && b.eşittir(bx, by);
 	}

@@ -21,6 +21,7 @@ public class AWTGörselleştirici implements Görselleştirici {
 	public Vektör2 boyut = new Vektör2(16.0F * 50.0F, 9.0F * 50.0F);
 	public int tamponSayısı = 3;
 	public boolean kenarYumuşatma = true;
+	public boolean tamEkran = false;
 	public Color arkaplanRengi = new Color(0.2F, 0.2F, 0.2F, 1.0F);
 	public AWTGirdi girdi = new AWTGirdi();
 	public Image ikon;
@@ -36,7 +37,14 @@ public class AWTGörselleştirici implements Görselleştirici {
 			return;
 		çerçeve = new JFrame(başlık);
 		tuval = new Canvas();
-		boyut.yuvarla();
+		if (tamEkran) {
+			çerçeve.setUndecorated(true);
+			GraphicsDevice d = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+			d.setFullScreenWindow(çerçeve);
+			boyut.yaz(d.getDisplayMode().getWidth(), d.getDisplayMode().getHeight());
+		} else {
+			boyut.yuvarla();
+		}
 		Dimension boyut = new Dimension((int)this.boyut.x, (int)this.boyut.y);
 		tuval.setMaximumSize(boyut);
 		tuval.setMinimumSize(boyut);
@@ -80,6 +88,7 @@ public class AWTGörselleştirici implements Görselleştirici {
 	@Override
 	public void göster() {
 		çizimTamponu.show();
+		Toolkit.getDefaultToolkit().sync();
 		çizer.clearRect(0, 0, (int)boyut.x, (int)boyut.y);
 	}
 	

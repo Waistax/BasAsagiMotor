@@ -6,7 +6,7 @@
 package başaşağıderebeyi.motor;
 
 public class Motor {
-	public static final String SÜRÜM = "0.15";
+	public static final String SÜRÜM = "0.16";
 	public static final Süreç UYGULAMA_SÜRECİ = new Süreç();
 	public static final Süreç GİRDİ_SÜRECİ = new Süreç();
 	public static final Süreç GÖSTERME_SÜRECİ = new Süreç();
@@ -60,7 +60,7 @@ public class Motor {
 					saniyeSayacı--;
 					uygulama.saniye();
 				}
-				Thread.sleep(5);
+//				Thread.sleep(5);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

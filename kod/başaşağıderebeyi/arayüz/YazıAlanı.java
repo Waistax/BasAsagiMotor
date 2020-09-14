@@ -7,7 +7,7 @@ package başaşağıderebeyi.arayüz;
 
 import başaşağıderebeyi.motor.*;
 
-public class YazıAlanı {
+public class YazıAlanı extends Öğe {
 	public final StringBuilder alan;
 	
 	public int yazımKonumu;
@@ -21,12 +21,13 @@ public class YazıAlanı {
 	public int sağOkTuşu = -1;
 	public int yerleştirTuşu = -1;
 	
-	public YazıAlanı() {
+	public YazıAlanı(Levha levha) {
+		super(levha);
 		alan = new StringBuilder();
 	}
 	
-	public YazıAlanı(int girişTuşu, int geriAlmaTuşu, int silmeTuşu, int solOkTuşu, int sağOkTuşu, int yerleştirTuşu) {
-		this();
+	public YazıAlanı(Levha levha, int girişTuşu, int geriAlmaTuşu, int silmeTuşu, int solOkTuşu, int sağOkTuşu, int yerleştirTuşu) {
+		this(levha);
 		this.girişTuşu = girişTuşu;
 		this.geriAlmaTuşu = geriAlmaTuşu;
 		this.silmeTuşu = silmeTuşu;
@@ -93,5 +94,10 @@ public class YazıAlanı {
 	public void temizle() {
 		alan.setLength(0);
 		yazımKonumu = 0;
+	}
+	
+	@Override
+	public String toString() {
+		return levha + " Yazı Alanı: " + alan.toString().trim();
 	}
 }
