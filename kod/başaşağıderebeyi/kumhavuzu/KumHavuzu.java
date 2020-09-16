@@ -48,7 +48,7 @@ public class KumHavuzu implements Uygulama {
 		yazmaSüreci = new Süreç();
 		ekran = new Ekran(görselleştirici.boyut.x, görselleştirici.boyut.y, MouseEvent.BUTTON1);
 		pencere = ekran.pencereAç("Pencere", 500.0F, 500.0F);
-		kayanLevha = new KayanLevha(pencere, 1000.0F, 1000.0F);
+		kayanLevha = new KayanLevha(pencere, 1000.0F, 1000.0F, MouseEvent.BUTTON1);
 		kayanLevha.levha.hizalama
 		.kx(new SabitHiza(10.0F))
 		.bx(new OrtaHiza())

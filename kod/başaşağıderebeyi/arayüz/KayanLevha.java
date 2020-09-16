@@ -18,14 +18,13 @@ public class KayanLevha extends Levha {
 	public float yatayKaydırma;
 	public float dikeyKaydırma;
 	
-	
-	public KayanLevha(Levha levha, float asılGenişlik, float asılYükseklik) {
+	public KayanLevha(Levha levha, float asılGenişlik, float asılYükseklik, int solDüğme) {
 		super(new Levha(levha));
 		görünürHizalama = new Hizalama();
 		this.asılGenişlik = asılGenişlik;
 		this.asılYükseklik = asılYükseklik;
-		yatayÇubuk = new KaydırmaÇubuğu(this, false);
-		dikeyÇubuk = new KaydırmaÇubuğu(this, true);
+		yatayÇubuk = new KaydırmaÇubuğu(this, false, solDüğme);
+		dikeyÇubuk = new KaydırmaÇubuğu(this, true, solDüğme);
 		görünürHizalama
 		.kx(new SabitHiza())
 		.bx(new TersSabitHiza(KaydırmaÇubuğu.KALINLIK))
