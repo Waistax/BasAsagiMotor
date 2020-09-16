@@ -13,9 +13,9 @@ public class PencereÇubuğu extends Öğe {
 	public PencereÇubuğu(Pencere pencere, String başlık) {
 		super(pencere);
 		hizalama
-		.kx(new SabitHiza(0.0F))
+		.kx(new SabitHiza())
 		.g(new TersSabitHiza(Pencere.ÇARPI_GENİŞLİĞİ))
-		.ky(new SabitHiza(0.0F))
+		.ky(new SabitHiza())
 		.y(new SabitBoyutHiza(Pencere.ÇUBUK_YÜKSEKLİĞİ));
 		this.başlık = başlık;
 	}

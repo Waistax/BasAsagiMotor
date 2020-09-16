@@ -10,6 +10,6 @@ import başaşağıderebeyi.matematik.*;
 public class OrtaHiza extends Hiza {
 	@Override
 	public void hesapla(Dikdörtgen2 levha) {
-		yön.yaz(hizalama.alan, (yön.boyut(levha) - yön.karşı().al(hizalama.alan)));
+		yön.yaz(hizalama.alan, (yön.kenarToplam(levha) - yön.karşı().al(hizalama.alan)));
 	}
 }

@@ -107,6 +107,30 @@ public class Dikdörtgen2 {
 		return k.x <= v.x && k.y <= v.y && b.x >= v.x && b.y >= v.y;
 	}
 	
+	public float genişlik() {
+		return b.x - k.x;
+	}
+	
+	public float yatayToplam() {
+		return k.x + b.x;
+	}
+	
+	public float yatayOrta() {
+		return yatayToplam() / 2.0F;
+	}
+	
+	public float yükseklik() {
+		return b.y - k.y;
+	}
+	
+	public float dikeyToplam() {
+		return k.y + b.y;
+	}
+	
+	public float dikeyOrta() {
+		return dikeyToplam() / 2.0F;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		return eşittir((Dikdörtgen2)obj);

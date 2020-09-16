@@ -6,13 +6,13 @@
 package başaşağıderebeyi.kumhavuzu;
 
 import başaşağıderebeyi.arayüz.*;
+import başaşağıderebeyi.arayüz.hiza.*;
 import başaşağıderebeyi.awtkütüphanesi.*;
 import başaşağıderebeyi.matematik.*;
 import başaşağıderebeyi.motor.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 
 public class KumHavuzu implements Uygulama {
 	public static final KumHavuzu KUM_HAVUZU = new KumHavuzu();
@@ -30,15 +30,14 @@ public class KumHavuzu implements Uygulama {
 	private Süreç yazmaSüreci;
 	private Color renk;
 	private Ekran ekran;
-	private Pencere pencere1;
-	private Pencere pencere2;
-	private Pencere pencere3;
+	private Pencere pencere;
+	private KayanLevha kayanLevha;
 	
 	public KumHavuzu() {
 		görselleştirici = new AWTGörselleştirici();
 		float boyut = 80;
 		görselleştirici.boyut.yaz(16 * boyut, 9 * boyut);
-		görselleştirici.tamEkran = true;
+		görselleştirici.tamEkran = false;
 	}
 	
 	@Override
@@ -48,10 +47,20 @@ public class KumHavuzu implements Uygulama {
 		xkon = 10;
 		yazmaSüreci = new Süreç();
 		ekran = new Ekran(görselleştirici.boyut.x, görselleştirici.boyut.y, MouseEvent.BUTTON1);
-		pencere1 = ekran.pencereAç("Pencere 1", new Random().nextInt(300) + 200, new Random().nextInt(300) + 200);
-		pencere2 = ekran.pencereAç("Pencere 2", new Random().nextInt(300) + 200, new Random().nextInt(300) + 200);
-		pencere3 = ekran.pencereAç("Pencere 3", new Random().nextInt(300) + 200, new Random().nextInt(300) + 200);
-		renk = new Color(0.5F, 0.0F, 0.5F, 1.0F);
+		pencere = ekran.pencereAç("Pencere", 500.0F, 500.0F);
+		kayanLevha = new KayanLevha(pencere, 1000.0F, 1000.0F);
+		kayanLevha.levha.hizalama
+		.kx(new SabitHiza(10.0F))
+		.bx(new OrtaHiza())
+		.ky(new SabitHiza(10.0F + Pencere.ÇUBUK_YÜKSEKLİĞİ))
+		.by(new TersSabitHiza(110.0F));
+		Düğme düğme = new Düğme(kayanLevha, "Bas Bana", () -> System.out.println("Bastın"), pencere.solDüğme);
+		düğme.hizalama
+		.kx(new SabitHiza(150.0F))
+		.bx(new OrtaHiza())
+		.ky(new SabitHiza(400.0F + Pencere.ÇUBUK_YÜKSEKLİĞİ))
+		.by(new SabitBoyutHiza(90.0F));
+		renk = new Color(0.4F, 0.4F, 0.4F, 1.0F);
 		görselleştirici.çizer.setFont(new Font("Consolas", Font.PLAIN, 17));
 		ekran.hizala();
 	}
@@ -76,6 +85,9 @@ public class KumHavuzu implements Uygulama {
 		görselleştirici.çizer.drawString("Uyg: " + Motor.UYGULAMA_SÜRECİ.ortalamayıAl(), xkon, 50);
 		görselleştirici.çizer.drawString("Gir: " + Motor.GİRDİ_SÜRECİ.ortalamayıAl(), xkon, 70);
 		görselleştirici.çizer.drawString("Gös: " + Motor.GÖSTERME_SÜRECİ.ortalamayıAl(), xkon, 90);
+		görselleştirici.çizer.drawString("Gör: " + kayanLevha.görünürHizalama.alan, xkon, 110);
+		görselleştirici.çizer.drawString("Hiz: " + kayanLevha.hizalama.alan, xkon, 130);
+		görselleştirici.çizer.drawString("Kay: " + kayanLevha.dikeyKaydırma, xkon, 150);
 //		çizer.drawString("İmleç: " + girdi.imleç + " Değişim: " + girdi.imleçDeğişimi, xkon, 50);
 //		çizer.drawString("F tuşu " + sayaç + " kere basıldı.", xkon, 70);
 //		if (girdi.tuşAşağı[KeyEvent.VK_SPACE])
@@ -96,7 +108,7 @@ public class KumHavuzu implements Uygulama {
 	private void rengiDeğiştir() {
 		Color renk = görselleştirici.çizer.getColor();
 		if (renk.equals(Color.WHITE)) {
-			görselleştirici.çizer.setColor(new Color(0.6F, 0.0F, 0.6F, 1.0F));
+			görselleştirici.çizer.setColor(new Color(0.6F, 0.6F, 0.6F, 1.0F));
 		} else {
 			görselleştirici.çizer.setColor(renk.brighter());
 		}
@@ -123,7 +135,7 @@ public class KumHavuzu implements Uygulama {
 				görselleştirici.çizer.setStroke(new BasicStroke(2.0F));
 			else
 				görselleştirici.çizer.setStroke(new BasicStroke(0.5F));
-			dörtgenÇiz(öğe.hizalama.alan);
+			dörtgenÇiz(öğe instanceof KayanLevha ? ((KayanLevha)öğe).görünürHizalama.alan : öğe.hizalama.alan);
 			görselleştirici.çizer.setColor(renk);
 		}
 	}
@@ -131,8 +143,14 @@ public class KumHavuzu implements Uygulama {
 	private void öğeÇiz(Öğe öğe) {
 		if (öğe instanceof Levha) {
 			kutuÇiz(öğe);
+			if (öğe instanceof KayanLevha) {
+				Dikdörtgen2 d = ((KayanLevha)öğe).görünürHizalama.alan;
+				görselleştirici.çizer.setClip((int)d.k.x, (int)d.k.y, (int)(d.b.x - d.k.x), (int)(d.b.y - d.k.y));
+			}
 			for (Öğe altÖğe : ((Levha)öğe).içerik)
 				öğeÇiz(altÖğe);
+			if (öğe instanceof KayanLevha)
+				görselleştirici.çizer.setClip(null);
 		} else if (öğe instanceof Düğme) {
 			kutuÇiz(öğe);
 			Color renk = görselleştirici.çizer.getColor();
@@ -162,6 +180,8 @@ public class KumHavuzu implements Uygulama {
 					öğe.hizalama.alan.k.x + ölçü.charWidth(' '),
 					(öğe.hizalama.alan.b.y + öğe.hizalama.alan.k.y + ölçü.getLeading() + ölçü.getAscent()) / 2.0F);
 			görselleştirici.çizer.setColor(renk);
+		} else if (öğe instanceof KaydırmaÇubuğu) {
+			kutuÇiz(öğe);
 		}
 	}
 }

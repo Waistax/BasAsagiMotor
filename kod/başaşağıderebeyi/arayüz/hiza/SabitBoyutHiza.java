@@ -8,10 +8,18 @@ package başaşağıderebeyi.arayüz.hiza;
 import başaşağıderebeyi.matematik.*;
 
 public class SabitBoyutHiza extends Hiza {
-	public final float boyut;
+	public float boyut;
+	
+	public SabitBoyutHiza() {
+	}
 	
 	public SabitBoyutHiza(float boyut) {
+		yaz(boyut);
+	}
+	
+	public SabitBoyutHiza yaz(float boyut) {
 		this.boyut = boyut;
+		return this;
 	}
 	
 	@Override

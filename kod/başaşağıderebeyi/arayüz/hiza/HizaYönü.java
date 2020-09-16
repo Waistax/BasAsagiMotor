@@ -101,9 +101,9 @@ public enum HizaYönü {
 	public float boyut(Dikdörtgen2 d) {
 		switch (this) {
 		case KÜÇÜK_YATAY, BÜYÜK_YATAY:
-			return d.b.x - d.k.x;
+			return d.genişlik();
 		case KÜÇÜK_DİKEY, BÜYÜK_DİKEY:
-			return d.b.y - d.k.y;
+			return d.yükseklik();
 		default:
 			return 0.0F;
 		}
@@ -125,6 +125,17 @@ public enum HizaYönü {
 			return this;
 		default:
 			return this;
+		}
+	}
+	
+	public float kenarToplam(Dikdörtgen2 d) {
+		switch (this) {
+		case KÜÇÜK_YATAY, BÜYÜK_YATAY:
+			return d.yatayToplam();
+		case KÜÇÜK_DİKEY, BÜYÜK_DİKEY:
+			return d.dikeyToplam();
+		default:
+			return 0.0F;
 		}
 	}
 }
