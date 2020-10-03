@@ -8,10 +8,22 @@ package başaşağıderebeyi.arayüz.hiza;
 import başaşağıderebeyi.matematik.*;
 
 public class TersSabitHiza extends Hiza {
-	public final float mesafe;
+	public float mesafe;
+	
+	public TersSabitHiza() {
+	}
 	
 	public TersSabitHiza(float mesafe) {
+		yaz(mesafe);
+	}
+	
+	public TersSabitHiza yaz(float mesafe) {
 		this.mesafe = mesafe;
+		return this;
+	}
+	
+	public TersSabitHiza taşı(float o) {
+		return yaz(mesafe + o);
 	}
 	
 	@Override

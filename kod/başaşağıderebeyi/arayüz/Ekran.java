@@ -6,6 +6,7 @@
 package başaşağıderebeyi.arayüz;
 
 import başaşağıderebeyi.arayüz.hiza.*;
+import başaşağıderebeyi.motor.*;
 
 public class Ekran extends Levha {
 	public final float genişlik;
@@ -50,6 +51,29 @@ public class Ekran extends Levha {
 	public void odağıAl() {
 		odaktanÇık();
 		odağaGir();
+	}
+	
+	@Override
+	public boolean tıklandığında(int düğme) {
+		odağıAl();
+		return false;
+	}
+	
+	@Override
+	public boolean girdi(Girdi girdi) {
+		üzerinde = true;
+		for (int i = 0; i < girdi.düğmeler; i++)
+			if (girdi.düğmeBasıldı[i])
+				tıklandığında(i);
+		for (int i = içerik.size() - 1; i > -1; i--)
+			if (içerik.get(i).girdi(girdi)) {
+				for (int j = 0; j < içerik.size(); j++)
+					if (i != j)
+						içerik.get(j).üzerindeDeğil();
+				return true;
+			}
+		odaklı = false;
+		return false;
 	}
 	
 	public Pencere pencereAç(String başlık, float genişlik, float yükseklik) {

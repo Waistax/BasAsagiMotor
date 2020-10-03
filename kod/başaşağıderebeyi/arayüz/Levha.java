@@ -48,7 +48,7 @@ public class Levha extends Öğe {
 						içerik.get(j).üzerindeDeğil();
 				return true;
 			}
-		return sonuç;
+		return sonuç || üzerinde;
 	}
 	
 	@Override

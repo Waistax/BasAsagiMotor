@@ -57,12 +57,12 @@ public class KaydırmaÇubuğu extends Öğe {
 			return false;
 		boolean sonuç = super.girdi(girdi);
 		SabitHiza hiza = (SabitHiza)hizalama.hizalar.get(2);
-		if (levha.odaklı && girdi.kaydırma != 0) {
+		if (levha.üzerinde && girdi.kaydırma != 0) {
 			if (kenar) {
-				hiza.taşı(girdi.kaydırma * kayanLevha.asılYükseklik * 0.01F);
+				hiza.taşı(girdi.kaydırma * kayanLevha.görünürHizalama.alan.yükseklik() * 0.01F);
 				sonuç = true;
 			} else if (!kayanLevha.dikeyÇubuk.açık) {
-				hiza.taşı(girdi.kaydırma * kayanLevha.asılGenişlik * 0.01F);
+				hiza.taşı(girdi.kaydırma * kayanLevha.görünürHizalama.alan.genişlik() * 0.01F);
 				sonuç = true;
 			}
 		}
