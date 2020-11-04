@@ -10,7 +10,9 @@ public interface Uygulama {
 	
 	void kaydet();
 	
-	void kare();
+	void güncelle();
+	
+	void çiz();
 	
 	void saniye();
 }

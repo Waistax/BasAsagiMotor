@@ -21,6 +21,7 @@ public class KumHavuzu implements Uygulama {
 	public static void main(String[] args) {
 		Motor.görselleştirici = KUM_HAVUZU.görselleştirici;
 		Motor.uygulama = KUM_HAVUZU;
+		Motor.hedefTıkOranı = 20.0F;
 		Motor.başla();
 	}
 	
@@ -69,21 +70,20 @@ public class KumHavuzu implements Uygulama {
 	}
 	
 	@Override
-	public void kare() {
-//		try {
-//			Thread.sleep(5);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+	public void güncelle() {
 		ekran.güncelle();
-		öğeÇiz(ekran);
 		if (Girdi.tuşAl(KeyEvent.VK_ESCAPE).basma)
 			Motor.dur();
+	}
+	
+	@Override
+	public void çiz() {
+		öğeÇiz(ekran);
 		görselleştirici.çizer.setColor(Color.white);
-		görselleştirici.çizer.drawString("SBK: " + Motor.kareOranı, xkon, 30);
-		görselleştirici.çizer.drawString("Uyg: " + Motor.UYGULAMA_SÜRECİ.ortalamayıAl(), xkon, 50);
-		görselleştirici.çizer.drawString("Gir: " + Motor.GİRDİ_SÜRECİ.ortalamayıAl(), xkon, 70);
-		görselleştirici.çizer.drawString("Gös: " + Motor.GÖSTERME_SÜRECİ.ortalamayıAl(), xkon, 90);
+		görselleştirici.çizer.drawString("Tık: " + Motor.tıkOranı, xkon, 30);
+		görselleştirici.çizer.drawString("Kar: " + Motor.kareOranı, xkon, 50);
+		görselleştirici.çizer.drawString("Gün: " + Motor.GÜNCELLEME_SÜRECİ.ortalamayıAl(), xkon, 70);
+		görselleştirici.çizer.drawString("Çiz: " + Motor.ÇİZME_SÜRECİ.ortalamayıAl(), xkon, 90);
 		görselleştirici.çizer.drawString("İml: " + Girdi.imleçHedefi, xkon, 110);
 		görselleştirici.çizer.drawString("Tek: " + Girdi.tekerlekHedefi, xkon, 130);
 	}

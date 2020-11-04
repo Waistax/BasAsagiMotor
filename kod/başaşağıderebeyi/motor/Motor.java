@@ -8,17 +8,17 @@ package başaşağıderebeyi.motor;
 import başaşağıderebeyi.arayüz.*;
 
 public class Motor {
-	public static final String SÜRÜM = "0.20";
-	public static final Süreç UYGULAMA_SÜRECİ = new Süreç();
-	public static final Süreç GİRDİ_SÜRECİ = new Süreç();
-	public static final Süreç GÖSTERME_SÜRECİ = new Süreç();
+	public static final String SÜRÜM = "0.21";
+	public static final Süreç GÜNCELLEME_SÜRECİ = new Süreç();
+	public static final Süreç ÇİZME_SÜRECİ = new Süreç();
 	
 	public static Görselleştirici görselleştirici;
 	public static Uygulama uygulama;
-	public static float hedefKareOranı;
+	public static float hedefTıkOranı;
 	public static boolean çalışmakta;
+	public static float tıkOranı;
 	public static float kareOranı;
-	public static float işlenmemişKareler;
+	public static float işlenmemişTıklar;
 	
 	public static float zaman() {
 		return (float)System.nanoTime();
@@ -41,23 +41,27 @@ public class Motor {
 			uygulama.yükle();
 			float öncekiZaman = zaman();
 			float saniyeSayacı = 0.0F;
+			int tıklar = 0;
 			int kareler = 0;
 			while (çalışmakta) {
 				float geçenZaman = zaman() - öncekiZaman;
 				öncekiZaman += geçenZaman;
 				geçenZaman /= 1000000000.0F;
-				if (hedefKareOranı == 0.0F) {
-					kare();
-					kareler++;
-					işlenmemişKareler = 0.0F;
+				if (hedefTıkOranı == 0.0F) {
+					tıklar++;
+					güncelle();
+					işlenmemişTıklar = 0.0F;
 				} else
-					for (işlenmemişKareler += geçenZaman * hedefKareOranı; işlenmemişKareler >= 1.0F; işlenmemişKareler--, kareler++)
-						kare();
+					for (işlenmemişTıklar += geçenZaman * hedefTıkOranı; işlenmemişTıklar >= 1.0F; işlenmemişTıklar--, tıklar++)
+						güncelle();
+				çiz();
+				kareler++;
 				if ((saniyeSayacı += geçenZaman) >= 1.0F) {
+					tıkOranı = tıklar / saniyeSayacı;
 					kareOranı = kareler / saniyeSayacı;
-					UYGULAMA_SÜRECİ.hesapla();
-					GİRDİ_SÜRECİ.hesapla();
-					GÖSTERME_SÜRECİ.hesapla();
+					GÜNCELLEME_SÜRECİ.hesapla();
+					ÇİZME_SÜRECİ.hesapla();
+					tıklar = 0;
 					kareler = 0;
 					saniyeSayacı--;
 					uygulama.saniye();
@@ -72,16 +76,18 @@ public class Motor {
 		}
 	}
 	
-	private static void kare() {
-		GİRDİ_SÜRECİ.başla();
+	private static void güncelle() {
+		GÜNCELLEME_SÜRECİ.başla();
 		Girdi.güncelle();
-		GİRDİ_SÜRECİ.dur();
-		UYGULAMA_SÜRECİ.başla();
-		uygulama.kare();
-		UYGULAMA_SÜRECİ.dur();
-		GÖSTERME_SÜRECİ.başla();
+		uygulama.güncelle();
+		GÜNCELLEME_SÜRECİ.dur();
+	}
+	
+	private static void çiz() {
+		ÇİZME_SÜRECİ.başla();
+		uygulama.çiz();
 		görselleştirici.göster();
-		GÖSTERME_SÜRECİ.dur();
+		ÇİZME_SÜRECİ.dur();
 	}
 	
 	private Motor() {
