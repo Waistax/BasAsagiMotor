@@ -6,20 +6,17 @@
 package başaşağıderebeyi.arayüz;
 
 import başaşağıderebeyi.arayüz.hiza.*;
-import başaşağıderebeyi.motor.*;
 
 public class KaydırmaÇubuğu extends Öğe {
 	public static final float KALINLIK = 10.0F;
 	
 	public final boolean kenar;
 	public final KayanLevha kayanLevha;
-	public final int solDüğme;
 	
-	public KaydırmaÇubuğu(KayanLevha kayanLevha, boolean kenar, int solDüğme) {
+	public KaydırmaÇubuğu(KayanLevha kayanLevha, boolean kenar) {
 		super(kayanLevha.levha);
 		this.kenar = kenar;
 		this.kayanLevha = kayanLevha;
-		this.solDüğme = solDüğme;
 		if (kenar) {
 			hizalama
 			.kx(new TersSabitHiza(KALINLIK))
@@ -52,23 +49,21 @@ public class KaydırmaÇubuğu extends Öğe {
 	}
 	
 	@Override
-	public boolean girdi(Girdi girdi) {
+	public void güncelle() {
 		if (!açıkMı())
-			return false;
-		boolean sonuç = super.girdi(girdi);
+			return;
 		SabitHiza hiza = (SabitHiza)hizalama.hizalar.get(2);
-		if (levha.üzerinde && girdi.kaydırma != 0) {
-			if (kenar) {
-				hiza.taşı(girdi.kaydırma * kayanLevha.görünürHizalama.alan.yükseklik() * 0.01F);
-				sonuç = true;
-			} else if (!kayanLevha.dikeyÇubuk.açık) {
-				hiza.taşı(girdi.kaydırma * kayanLevha.görünürHizalama.alan.genişlik() * 0.01F);
-				sonuç = true;
-			}
+		if (Girdi.tekerlekUygunMu(this) && Girdi.tekerlek != 0) {
+			if (kenar)
+				hiza.taşı(Girdi.tekerlek * kayanLevha.görünürHizalama.alan.yükseklik() * 0.01F);
+			else
+				hiza.taşı(Girdi.tekerlek * kayanLevha.görünürHizalama.alan.genişlik() * 0.01F);
+			odakla();
+			Girdi.tekerlekKullanıldı(this);
 		}
-		if (odaklı && girdi.düğmeAşağı[solDüğme]) {
-			hiza.taşı(kenar ? girdi.imleçDeğişimi.y : girdi.imleçDeğişimi.x);
-			sonuç = true;
+		if (Girdi.imleçUygunMu(this) && ekran.tık.aşağı) {
+			hiza.taşı(kenar ? Girdi.SÜRÜKLEME.y : Girdi.SÜRÜKLEME.x);
+			odakla();
 		}
 		float enFazlaKayma = kenar
 				? kayanLevha.görünürHizalama.alan.yükseklik() - hizalama.alan.yükseklik()
@@ -82,6 +77,10 @@ public class KaydırmaÇubuğu extends Öğe {
 		else
 			kayanLevha.yatayKaydırma = hiza.mesafe / enFazlaKayma;
 		levha.hizala();
-		return sonuç || üzerinde;
+	}
+	
+	@Override
+	public String toString() {
+		return (kenar ? "Dikey" : "Yatay") + " Kaydırma Çubuğu";
 	}
 }

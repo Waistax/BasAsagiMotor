@@ -6,23 +6,30 @@
 package başaşağıderebeyi.arayüz;
 
 import başaşağıderebeyi.arayüz.hiza.*;
-import başaşağıderebeyi.motor.*;
 
 public class Öğe {
 	public final Levha levha;
+	public final Pencere pencere;
+	public final Ekran ekran;
 	public final Hizalama hizalama;
 	
 	public boolean açık;
 	public boolean üzerinde;
-	public boolean odaklı;
+	public boolean imleçte;
 	
-	public Öğe(Levha levha) {
+	public Öğe(Levha levha, Pencere pencere, Ekran ekran) {
 		this.levha = levha;
+		this.pencere = pencere;
+		this.ekran = ekran;
 		hizalama = new Hizalama();
 		açık = true;
 		ekle();
 	}
 	
+	public Öğe(Levha levha) {
+		this(levha, levha.pencere, levha.ekran);
+	}
+
 	public void ekle() {
 		levha.içerik.add(this);
 	}
@@ -31,43 +38,23 @@ public class Öğe {
 		hizalama.hesapla(levha.hizalama.alan);
 	}
 	
+	public void odakla() {
+		levha.odakla();
+	}
+	
 	public boolean açıkMı() {
 		return levha.açıkMı() && açık;
 	}
 	
-	public void odağaGir() {
-		odaklı = true;
-		levha.odağaGir();
+	public void üzerindeyiHesapla() {
+		üzerinde = levha.üzerinde && hizalama.alan.içinde(Girdi.İMLEÇ);
 	}
 	
-	public void odaktanÇık() {
-		odaklı = false;
+	public void imleciHesapla() {
+		if (imleçte = üzerinde && Girdi.imleçUygunMu(this))
+			Girdi.imleçKullanıldı(this);
 	}
 	
-	public void odağıAl() {
-		levha.odaktanÇık();
-		odağaGir();
-	}
-	
-	public boolean tıklandığında(int düğme) {
-		odağıAl();
-		return true;
-	}
-	
-	public void üzerindeDeğil() {
-		üzerinde = false;
-	}
-	
-	public boolean girdi(Girdi girdi) {
-		if (hizalama.alan.içinde(girdi.imleç)) {
-			üzerinde = true;
-			for (int i = 0; i < girdi.düğmeler; i++)
-				if (girdi.düğmeBasıldı[i])
-					if (tıklandığında(i))
-						return true;
-		} else {
-			üzerindeDeğil();
-		}
-		return false;
+	public void güncelle() {
 	}
 }

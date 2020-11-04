@@ -21,6 +21,16 @@ public class PencereÇubuğu extends Öğe {
 	}
 	
 	@Override
+	public void güncelle() {
+		if (Girdi.imleçUygunMu(this) && ekran.tık.aşağı) {
+			odakla();
+			((SerbestHiza)levha.hizalama.hizalar.get(0)).taşı(Girdi.SÜRÜKLEME.x);
+			((SerbestHiza)levha.hizalama.hizalar.get(2)).taşı(Girdi.SÜRÜKLEME.y);
+			levha.hizala();
+		}
+	}
+	
+	@Override
 	public String toString() {
 		return "Pencere Çubuğu: " + başlık;
 	}

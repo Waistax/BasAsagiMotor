@@ -6,7 +6,6 @@
 package başaşağıderebeyi.arayüz;
 
 import başaşağıderebeyi.arayüz.hiza.*;
-import başaşağıderebeyi.motor.*;
 
 public class Pencere extends Levha {
 	public static final float ÇUBUK_YÜKSEKLİĞİ = 30.0F;
@@ -16,10 +15,9 @@ public class Pencere extends Levha {
 	public final float yükseklik;
 	public final PencereÇubuğu çubuk;
 	public final Düğme çarpı;
-	public final int solDüğme;
 	
-	public Pencere(Ekran ekran, String başlık, float genişlik, float yükseklik, int solDüğme) {
-		super(ekran);
+	public Pencere(Ekran ekran, String başlık, float genişlik, float yükseklik) {
+		super(ekran, null, ekran);
 		this.genişlik = genişlik;
 		this.yükseklik = yükseklik;
 		hizalama
@@ -33,28 +31,17 @@ public class Pencere extends Levha {
 			public void run() {
 				ekran.içerik.remove(çarpı.levha);
 			}
-		}, solDüğme);
+		});
 		çarpı.hizalama
 		.kx(new TersSabitHiza(ÇARPI_GENİŞLİĞİ))
 		.bx(new TersSabitHiza(0.0F))
 		.ky(new SabitHiza(0.0F))
 		.by(new SabitBoyutHiza(ÇUBUK_YÜKSEKLİĞİ));
-		this.solDüğme = solDüğme;
-	}
-
-	@Override
-	public void odağıAl() {
-		((Ekran)levha).odakla(this);
 	}
 	
 	@Override
-	public boolean girdi(Girdi girdi) {
-		if (çubuk.odaklı && girdi.düğmeAşağı[solDüğme]) {
-			((SerbestHiza)hizalama.hizalar.get(0)).taşı(girdi.imleçDeğişimi.x);
-			((SerbestHiza)hizalama.hizalar.get(2)).taşı(girdi.imleçDeğişimi.y);
-			hizala();
-		}
-		return super.girdi(girdi) || üzerinde;
+	public void odakla() {
+		ekran.odakla(this);
 	}
 	
 	@Override

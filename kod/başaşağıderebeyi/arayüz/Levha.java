@@ -5,15 +5,13 @@
  */
 package başaşağıderebeyi.arayüz;
 
-import başaşağıderebeyi.motor.*;
-
 import java.util.*;
 
 public class Levha extends Öğe {
 	public final List<Öğe> içerik;
 	
-	public Levha(Levha levha) {
-		super(levha);
+	public Levha(Levha levha, Pencere pencere, Ekran ekran) {
+		super(levha, pencere, ekran);
 		içerik = new ArrayList<>();
 	}
 	
@@ -23,34 +21,31 @@ public class Levha extends Öğe {
 		for (Öğe öğe : içerik)
 			öğe.hizala();
 	}
+	
+	@Override
+	public void üzerindeyiHesapla() {
+		super.üzerindeyiHesapla();
+		for (Öğe öğe : içerik)
+			öğe.üzerindeyiHesapla();
+	}
+	
+	@Override
+	public void imleciHesapla() {
+		for (int i = içerik.size() - 1; i > -1; i--) {
+			Öğe öğe = içerik.get(i);
+			öğe.imleciHesapla();
+		}
+		super.imleciHesapla();
+	}
+	
+	@Override
+	public void güncelle() {
+		for (int i = içerik.size() - 1; i > -1; i--) {
+			Öğe öğe = içerik.get(i);
+			öğe.güncelle();
+		}
+	}
 
-	@Override
-	public void odaktanÇık() {
-		super.odaktanÇık();
-		for (Öğe öğe : içerik)
-			öğe.odaktanÇık();
-	}
-	
-	@Override
-	public void üzerindeDeğil() {
-		super.üzerindeDeğil();
-		for (Öğe öğe : içerik)
-			öğe.üzerindeDeğil();
-	}
-	
-	@Override
-	public boolean girdi(Girdi girdi) {
-		boolean sonuç = super.girdi(girdi);
-		for (int i = içerik.size() - 1; i > -1; i--)
-			if (içerik.get(i).girdi(girdi)) {
-				for (int j = 0; j < içerik.size(); j++)
-					if (i != j)
-						içerik.get(j).üzerindeDeğil();
-				return true;
-			}
-		return sonuç || üzerinde;
-	}
-	
 	@Override
 	public String toString() {
 		return "Levha: " + içerik;

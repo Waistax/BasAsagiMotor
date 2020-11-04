@@ -14,4 +14,9 @@ public class Liste extends Öğe {
 		super(levha);
 		yazılar = new ArrayList<>();
 	}
+	
+	@Override
+	public String toString() {
+		return "Liste: " + yazılar;
+	}
 }

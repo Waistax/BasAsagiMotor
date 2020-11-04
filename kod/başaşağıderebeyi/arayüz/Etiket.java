@@ -14,6 +14,6 @@ public class Etiket extends Öğe {
 	
 	@Override
 	public String toString() {
-		return levha + " Etiketi: " + yazı;
+		return "Etiketi: " + yazı;
 	}
 }

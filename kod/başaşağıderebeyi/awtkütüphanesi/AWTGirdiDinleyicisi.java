@@ -5,27 +5,23 @@
  */
 package başaşağıderebeyi.awtkütüphanesi;
 
-import başaşağıderebeyi.motor.*;
+import başaşağıderebeyi.arayüz.*;
 
 import java.awt.event.*;
 
-public class AWTGirdi extends Girdi implements KeyListener, MouseListener, MouseWheelListener, MouseMotionListener {
-	public AWTGirdi() {
-		super(256, 8);
-	}
-	
+public class AWTGirdiDinleyicisi implements KeyListener, MouseListener, MouseWheelListener, MouseMotionListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		tuşGirdisi[e.getKeyCode()] = true;
+		Girdi.girdiYaz(e.getKeyCode(), true);
 	}
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
-		tuşGirdisi[e.getKeyCode()] = false;
+		Girdi.girdiYaz(e.getKeyCode(), false);
 	}
 	
 	@Override
@@ -34,12 +30,12 @@ public class AWTGirdi extends Girdi implements KeyListener, MouseListener, Mouse
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		düğmeGirdisi[e.getButton()] = true;
+		Girdi.fareGirdisiYaz(e.getButton(), true);
 	}
 	
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		düğmeGirdisi[e.getButton()] = false;
+		Girdi.fareGirdisiYaz(e.getButton(), false);
 	}
 	
 	@Override
@@ -52,16 +48,16 @@ public class AWTGirdi extends Girdi implements KeyListener, MouseListener, Mouse
 	
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		kaydırmaGirdisi += e.getWheelRotation();
+		Girdi.tekerlekGirdisiYaz(e.getWheelRotation());
 	}
 	
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		imleçGirdisi.yaz(e.getX(), e.getY());
+		Girdi.imleçGirdisiYaz(e.getX(), e.getY());
 	}
 	
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		imleçGirdisi.yaz(e.getX(), e.getY());
+		Girdi.imleçGirdisiYaz(e.getX(), e.getY());
 	}
 }

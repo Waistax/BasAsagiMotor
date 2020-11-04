@@ -8,29 +8,35 @@ package başaşağıderebeyi.arayüz;
 public class Düğme extends Öğe {
 	public final String yazı;
 	public final Runnable çalıştırılabilir;
-	public final int solDüğme;
 	
-	public Düğme(Levha levha, String yazı, Runnable çalıştırılabilir, int solDüğme) {
+	public boolean basıldı;
+	
+	public Düğme(Levha levha, String yazı, Runnable çalıştırılabilir) {
 		super(levha);
 		this.yazı = yazı;
 		this.çalıştırılabilir = çalıştırılabilir;
-		this.solDüğme = solDüğme;
 	}
 	
 	@Override
-	public boolean tıklandığında(int düğme) {
+	public void güncelle() {
 		if (!açıkMı())
-			return false;
-		if (düğme == solDüğme) {
-			odağıAl();
-			çalıştırılabilir.run();
-			return true;
-		}
-		return false;
+			return;
+		if (Girdi.imleçUygunMu(this)) {
+			if (ekran.tık.basma) {
+				odakla();
+				basıldı = true;
+			}
+			if (basıldı && ekran.tık.salma) {
+				odakla();
+				çalıştırılabilir.run();
+				basıldı = false;
+			}
+		} else
+			basıldı = false;
 	}
 	
 	@Override
 	public String toString() {
-		return levha + " Düğmesi: " + yazı;
+		return "Düğme: " + yazı;
 	}
 }

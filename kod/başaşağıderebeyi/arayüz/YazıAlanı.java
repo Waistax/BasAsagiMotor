@@ -98,6 +98,6 @@ public class YazıAlanı extends Öğe {
 	
 	@Override
 	public String toString() {
-		return levha + " Yazı Alanı: " + alan.toString().trim();
+		return "Yazı Alanı: " + alan.toString().trim();
 	}
 }

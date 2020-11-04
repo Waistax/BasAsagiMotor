@@ -23,7 +23,7 @@ public class AWTGörselleştirici implements Görselleştirici {
 	public boolean kenarYumuşatma = true;
 	public boolean tamEkran = false;
 	public Color arkaplanRengi = new Color(0.2F, 0.2F, 0.2F, 1.0F);
-	public AWTGirdi girdi = new AWTGirdi();
+	public AWTGirdiDinleyicisi dinleyici = new AWTGirdiDinleyicisi();
 	public Image ikon;
 	public Cursor imleç;
 	public JFrame çerçeve;
@@ -92,11 +92,6 @@ public class AWTGörselleştirici implements Görselleştirici {
 		çizer.clearRect(0, 0, (int)boyut.x, (int)boyut.y);
 	}
 	
-	@Override
-	public Girdi girdiyiAl() {
-		return girdi;
-	}
-	
 	private void kenarYumuşatmayıAyarla() {
 		çizer.setRenderingHint(KEY_ANTIALIASING, kenarYumuşatma ? VALUE_ANTIALIAS_ON : VALUE_ANTIALIAS_OFF);
 		çizer.setRenderingHint(KEY_TEXT_ANTIALIASING, kenarYumuşatma ? VALUE_TEXT_ANTIALIAS_ON : VALUE_TEXT_ANTIALIAS_OFF);
@@ -107,10 +102,10 @@ public class AWTGörselleştirici implements Görselleştirici {
 	}
 	
 	private void girdiyiEkle() {
-		tuval.addKeyListener(girdi);
-		tuval.addMouseListener(girdi);
-		tuval.addMouseWheelListener(girdi);
-		tuval.addMouseMotionListener(girdi);
+		tuval.addKeyListener(dinleyici);
+		tuval.addMouseListener(dinleyici);
+		tuval.addMouseWheelListener(dinleyici);
+		tuval.addMouseMotionListener(dinleyici);
 	}
 	
 	private void ikonuAyarla() {
@@ -133,8 +128,8 @@ public class AWTGörselleştirici implements Görselleştirici {
 			arkaplanRenginiAyarla();
 	}
 	
-	public void girdiyiAyarla(AWTGirdi girdi) {
-		this.girdi = girdi;
+	public void dinleyiciyiAyarla(AWTGirdiDinleyicisi dinleyici) {
+		this.dinleyici = dinleyici;
 		if (çerçeve != null)
 			girdiyiEkle();
 	}

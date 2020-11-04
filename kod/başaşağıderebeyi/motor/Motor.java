@@ -5,8 +5,10 @@
  */
 package başaşağıderebeyi.motor;
 
+import başaşağıderebeyi.arayüz.*;
+
 public class Motor {
-	public static final String SÜRÜM = "0.19";
+	public static final String SÜRÜM = "0.20";
 	public static final Süreç UYGULAMA_SÜRECİ = new Süreç();
 	public static final Süreç GİRDİ_SÜRECİ = new Süreç();
 	public static final Süreç GÖSTERME_SÜRECİ = new Süreç();
@@ -60,7 +62,6 @@ public class Motor {
 					saniyeSayacı--;
 					uygulama.saniye();
 				}
-//				Thread.sleep(5);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,7 +74,7 @@ public class Motor {
 	
 	private static void kare() {
 		GİRDİ_SÜRECİ.başla();
-		görselleştirici.girdiyiAl().kare();
+		Girdi.güncelle();
 		GİRDİ_SÜRECİ.dur();
 		UYGULAMA_SÜRECİ.başla();
 		uygulama.kare();

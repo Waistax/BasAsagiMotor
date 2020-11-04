@@ -11,6 +11,4 @@ public interface Görselleştirici {
 	void yokEt();
 	
 	void göster();
-	
-	Girdi girdiyiAl();
 }
