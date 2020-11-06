@@ -7,11 +7,15 @@ package başaşağıderebeyi.motor;
 
 import başaşağıderebeyi.arayüz.*;
 
+import java.util.concurrent.*;
+
 public class Motor {
-	public static final String SÜRÜM = "0.22";
+	public static final String SÜRÜM = "0.23";
 	public static final Süreç GÜNCELLEME_SÜRECİ = new Süreç();
 	public static final Süreç ÇİZME_SÜRECİ = new Süreç();
 	
+	public static int yürütücüİşlemSayısı;
+	public static ExecutorService yürütücü;
 	public static Görselleştirici görselleştirici;
 	public static Uygulama uygulama;
 	public static float hedefTıkOranı;
@@ -37,6 +41,8 @@ public class Motor {
 	
 	public static void çalış() {
 		try {
+			yürütücüİşlemSayısı = Runtime.getRuntime().availableProcessors() - 1;
+			yürütücü = Executors.newFixedThreadPool(yürütücüİşlemSayısı);
 			görselleştirici.oluştur();
 			uygulama.yükle();
 			float öncekiZaman = zaman();
@@ -47,13 +53,12 @@ public class Motor {
 				float geçenZaman = zaman() - öncekiZaman;
 				öncekiZaman += geçenZaman;
 				geçenZaman /= 1000000000.0F;
-				işlenmemişTıklar += geçenZaman * hedefTıkOranı;
 				if (hedefTıkOranı == 0.0F) {
 					tıklar++;
 					güncelle();
-//					işlenmemişTıklar = 0.0F;
+					işlenmemişTıklar = 0.0F;
 				} else
-					for (; işlenmemişTıklar >= 1.0F; işlenmemişTıklar--, tıklar++)
+					for (işlenmemişTıklar += geçenZaman * hedefTıkOranı; işlenmemişTıklar >= 1.0F; işlenmemişTıklar--, tıklar++)
 						güncelle();
 				çiz();
 				kareler++;
@@ -73,6 +78,12 @@ public class Motor {
 		} finally {
 			görselleştirici.yokEt();
 			uygulama.kaydet();
+			yürütücü.shutdown();
+			try {
+				yürütücü.awaitTermination(1, TimeUnit.SECONDS);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			System.exit(0);
 		}
 	}

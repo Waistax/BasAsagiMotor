@@ -26,9 +26,9 @@ public class Topluluk {
 			aile.çiz();
 	}
 	
-	public void kaldır(Varlık varlık) {
-		for (Aile aile : aileler)
-			aile.varlıklar.remove(varlık);
-		varlıklar.remove(varlık);
+	public void çıkar(Varlık varlık) {
+		if (varlıklar.remove(varlık))
+			for (Aile aile : aileler)
+				aile.çıkar(varlık);
 	}
 }

@@ -8,19 +8,26 @@ package başaşağıderebeyi.kumhavuzu;
 import başaşağıderebeyi.varlık.*;
 
 public class KutuHareket extends Aile {
+	public int sayaç;
+	
 	public KutuHareket(Topluluk topluluk) {
 		super(topluluk, KutuBileşeni.class);
 	}
 	
 	@Override
 	public void güncelle() {
-		for (Varlık varlık : varlıklar) {
-			Kutu kutu = (Kutu)varlık.bileşen(KutuBileşeni.class).güncel;
-			kutu.d.k.x += 5F;
-			kutu.d.k.y += 5F;
-			kutu.d.b.x += 5F;
-			kutu.d.b.y += 5F;
-//			kutu.renk.x = (kutu.renk.x + 0.1F) % 1.0F;
+		if (++sayaç >= 20) {
+			sayaç = -20;
 		}
+		paralelYürüt();
+	}
+	
+	@Override
+	public void yürüt(Varlık varlık) {
+		Kutu kutu = (Kutu)varlık.bileşen(KutuBileşeni.class).güncel;
+		kutu.d.k.x = ((float)Math.cos(sayaç / 10.0 * kutu.renk.x) + kutu.renk.z) * 100;
+		kutu.d.k.y = ((float)Math.cos(sayaç / 10.0 * kutu.renk.y) + kutu.renk.z) * 100;
+		kutu.d.b.x = kutu.d.k.x * 4;
+		kutu.d.b.y = kutu.d.k.y * 4;
 	}
 }

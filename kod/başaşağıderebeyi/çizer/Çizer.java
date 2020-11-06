@@ -15,11 +15,7 @@ public abstract class Çizer extends Aile {
 	
 	@Override
 	public void güncelle() {
-		for (Varlık varlık : varlıklar) {
-			Çizilebilir çizilebilir = varlık.bileşen(Çizilebilir.class);
-			çizilebilir.öbürkü.yaz(çizilebilir.önceki);
-			çizilebilir.önceki.yaz(çizilebilir.güncel);
-		}
+		paralelYürüt();
 	}
 	
 	@Override
@@ -30,6 +26,13 @@ public abstract class Çizer extends Aile {
 			Çizilebilir çizilebilir = varlık.bileşen(Çizilebilir.class);
 			çiz(çizilebilir.anlık.araDeğer(çizilebilir.önceki, çizilebilir.öbürkü, öncekineUzaklık, öbürküneUzaklık));
 		}
+	}
+	
+	@Override
+	public void yürüt(Varlık varlık) {
+		Çizilebilir çizilebilir = varlık.bileşen(Çizilebilir.class);
+		çizilebilir.öbürkü.yaz(çizilebilir.önceki);
+		çizilebilir.önceki.yaz(çizilebilir.güncel);
 	}
 	
 	public abstract void çiz(Çizim çizim);

@@ -69,7 +69,7 @@ public class KumHavuzu implements Uygulama {
 		new KutuÇizer(topluluk, görselleştirici.çizer);
 		new VarlıkListesi(topluluk, liste);
 		new KutuHareket(topluluk);
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 3000; i++) {
 			Varlık varlık = new Varlık(topluluk);
 			Kutu kutu = (Kutu)new KutuBileşeni(varlık).güncel;
 			kutu.d.yaz(rastgele.nextFloat() * 300.0F, rastgele.nextFloat() * 300.0F, (rastgele.nextFloat() + 1.0F) * 300.0F, (rastgele.nextFloat() + 1.0F) * 300.0F);
