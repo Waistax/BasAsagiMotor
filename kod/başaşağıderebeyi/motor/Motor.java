@@ -8,7 +8,7 @@ package başaşağıderebeyi.motor;
 import başaşağıderebeyi.arayüz.*;
 
 public class Motor {
-	public static final String SÜRÜM = "0.21";
+	public static final String SÜRÜM = "0.22";
 	public static final Süreç GÜNCELLEME_SÜRECİ = new Süreç();
 	public static final Süreç ÇİZME_SÜRECİ = new Süreç();
 	
@@ -47,12 +47,13 @@ public class Motor {
 				float geçenZaman = zaman() - öncekiZaman;
 				öncekiZaman += geçenZaman;
 				geçenZaman /= 1000000000.0F;
+				işlenmemişTıklar += geçenZaman * hedefTıkOranı;
 				if (hedefTıkOranı == 0.0F) {
 					tıklar++;
 					güncelle();
-					işlenmemişTıklar = 0.0F;
+//					işlenmemişTıklar = 0.0F;
 				} else
-					for (işlenmemişTıklar += geçenZaman * hedefTıkOranı; işlenmemişTıklar >= 1.0F; işlenmemişTıklar--, tıklar++)
+					for (; işlenmemişTıklar >= 1.0F; işlenmemişTıklar--, tıklar++)
 						güncelle();
 				çiz();
 				kareler++;

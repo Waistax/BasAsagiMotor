@@ -10,6 +10,7 @@ import başaşağıderebeyi.arayüz.hiza.*;
 import başaşağıderebeyi.awtkütüphanesi.*;
 import başaşağıderebeyi.matematik.*;
 import başaşağıderebeyi.motor.*;
+import başaşağıderebeyi.varlık.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -30,6 +31,7 @@ public class KumHavuzu implements Uygulama {
 	private Ekran ekran;
 	private Pencere pencere;
 	private KayanLevha kayanLevha;
+	private Topluluk topluluk;
 	
 	public KumHavuzu() {
 		görselleştirici = new AWTGörselleştirici();
@@ -46,23 +48,33 @@ public class KumHavuzu implements Uygulama {
 		ekran = new Ekran(görselleştirici.boyut.x, görselleştirici.boyut.y, Girdi.fareTuşuAl(MouseEvent.BUTTON1));
 		pencere = ekran.pencereAç("Deneme", 500.0F, 500.0F);
 		Random rastgele = new Random();
-		for (int i = 0; i < rastgele.nextInt(20) + 1; i++) {
-			ekran.pencereAç("Rastgele " + (i + 1), (rastgele.nextInt(6) + 2) * 100, (rastgele.nextInt(6) + 2) * 100);
-		}
-		kayanLevha = new KayanLevha(pencere, 1000.0F, 1000.0F);
+//		for (int i = 0; i < rastgele.nextInt(20) + 1; i++) {
+//			ekran.pencereAç("Rastgele " + (i + 1), (rastgele.nextInt(6) + 2) * 100, (rastgele.nextInt(6) + 2) * 100);
+//		}
+		kayanLevha = new KayanLevha(pencere, 10000.0F, 10000.0F);
 		kayanLevha.levha.hizalama
 		.kx(new SabitHiza(10.0F))
 		.bx(new OrtaHiza())
 		.ky(new SabitHiza(10.0F + Pencere.ÇUBUK_YÜKSEKLİĞİ))
 		.by(new TersSabitHiza(110.0F));
-		Düğme düğme = new Düğme(kayanLevha, "Bas Bana", () -> System.out.println("Bastın"));
-		düğme.hizalama
-		.kx(new SabitHiza(150.0F))
+		Liste liste = new Liste(kayanLevha);
+		liste.hizalama
+		.kx(new SabitHiza(10.0F))
 		.bx(new OrtaHiza())
-		.ky(new SabitHiza(400.0F + Pencere.ÇUBUK_YÜKSEKLİĞİ))
-		.by(new SabitBoyutHiza(90.0F));
+		.ky(new SabitHiza(10.0F))
+		.by(new OrtaHiza());
 		görselleştirici.çizer.setFont(new Font("Consolas", Font.PLAIN, 17));
 		ekran.hizala();
+		topluluk = new Topluluk();
+		new KutuÇizer(topluluk, görselleştirici.çizer);
+		new VarlıkListesi(topluluk, liste);
+		new KutuHareket(topluluk);
+		for (int i = 0; i < 3; i++) {
+			Varlık varlık = new Varlık(topluluk);
+			Kutu kutu = (Kutu)new KutuBileşeni(varlık).güncel;
+			kutu.d.yaz(rastgele.nextFloat() * 300.0F, rastgele.nextFloat() * 300.0F, (rastgele.nextFloat() + 1.0F) * 300.0F, (rastgele.nextFloat() + 1.0F) * 300.0F);
+			kutu.renk.yaz(rastgele.nextFloat(), rastgele.nextFloat(), rastgele.nextFloat(), 1.0F);
+		}
 	}
 	
 	@Override
@@ -72,20 +84,28 @@ public class KumHavuzu implements Uygulama {
 	@Override
 	public void güncelle() {
 		ekran.güncelle();
+		topluluk.güncelle();
 		if (Girdi.tuşAl(KeyEvent.VK_ESCAPE).basma)
 			Motor.dur();
 	}
 	
 	@Override
 	public void çiz() {
+//		try {
+//			Thread.sleep(2000);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 		öğeÇiz(ekran);
+		topluluk.çiz();
 		görselleştirici.çizer.setColor(Color.white);
 		görselleştirici.çizer.drawString("Tık: " + Motor.tıkOranı, xkon, 30);
 		görselleştirici.çizer.drawString("Kar: " + Motor.kareOranı, xkon, 50);
 		görselleştirici.çizer.drawString("Gün: " + Motor.GÜNCELLEME_SÜRECİ.ortalamayıAl(), xkon, 70);
 		görselleştirici.çizer.drawString("Çiz: " + Motor.ÇİZME_SÜRECİ.ortalamayıAl(), xkon, 90);
-		görselleştirici.çizer.drawString("İml: " + Girdi.imleçHedefi, xkon, 110);
-		görselleştirici.çizer.drawString("Tek: " + Girdi.tekerlekHedefi, xkon, 130);
+		görselleştirici.çizer.drawString("İşl: " + Motor.işlenmemişTıklar, xkon, 110);
+		görselleştirici.çizer.drawString("İml: " + Girdi.imleçHedefi, xkon, 130);
+		görselleştirici.çizer.drawString("Tek: " + Girdi.tekerlekHedefi, xkon, 150);
 	}
 	
 	@Override
@@ -102,6 +122,8 @@ public class KumHavuzu implements Uygulama {
 	
 	private void öğeÇiz(Öğe öğe) {
 		FontMetrics ölçü = görselleştirici.çizer.getFontMetrics();
+		float yazıSonu = ölçü.getLeading() + ölçü.getAscent();
+		float yükseklik = yazıSonu + ölçü.getDescent();
 		if (öğe instanceof Levha) {
 			if (öğe instanceof KayanLevha) {
 				Dikdörtgen2 d = ((KayanLevha)öğe).görünürHizalama.alan;
@@ -120,22 +142,29 @@ public class KumHavuzu implements Uygulama {
 			String yazı = ((Düğme)öğe).yazı;
 			görselleştirici.çizer.drawString(yazı,
 					(öğe.hizalama.alan.b.x + öğe.hizalama.alan.k.x - ölçü.stringWidth(yazı)) / 2.0F,
-					(öğe.hizalama.alan.b.y + öğe.hizalama.alan.k.y + ölçü.getLeading() + ölçü.getAscent()) / 2.0F);
+					(öğe.hizalama.alan.b.y + öğe.hizalama.alan.k.y + yazıSonu) / 2.0F);
 		} else if (öğe instanceof Etiket) {
 			görselleştirici.çizer.setColor(Color.black);
 			String yazı = ((Etiket)öğe).yazı;
 			görselleştirici.çizer.drawString(yazı,
 					öğe.hizalama.alan.k.x,
-					(öğe.hizalama.alan.b.y + öğe.hizalama.alan.k.y + ölçü.getLeading() + ölçü.getAscent()) / 2.0F);
+					(öğe.hizalama.alan.b.y + öğe.hizalama.alan.k.y + yazıSonu) / 2.0F);
 		} else if (öğe instanceof PencereÇubuğu) {
 			kutuÇiz(öğe.hizalama.alan, Color.WHITE, false);
 			görselleştirici.çizer.setColor(Color.black);
 			String yazı = ((PencereÇubuğu)öğe).başlık;
 			görselleştirici.çizer.drawString(yazı,
 					öğe.hizalama.alan.k.x + ölçü.charWidth(' '),
-					(öğe.hizalama.alan.b.y + öğe.hizalama.alan.k.y + ölçü.getLeading() + ölçü.getAscent()) / 2.0F);
+					(öğe.hizalama.alan.b.y + öğe.hizalama.alan.k.y + yazıSonu) / 2.0F);
 		} else if (öğe instanceof KaydırmaÇubuğu) {
 			kutuÇiz(öğe.hizalama.alan, Color.LIGHT_GRAY, false);
+		} else if (öğe instanceof Liste) {
+			görselleştirici.çizer.setColor(Color.black);
+			float y = öğe.hizalama.alan.k.y;
+			for (String yazı : ((Liste)öğe).yazılar)
+				görselleştirici.çizer.drawString(yazı,
+						öğe.hizalama.alan.k.x,
+						y += yükseklik);
 		}
 	}
 }
