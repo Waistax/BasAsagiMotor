@@ -40,7 +40,9 @@ public abstract class Çizer extends Aile {
 			çizilebilir.öbürkü.yaz(çizilebilir.önceki);
 			çizilebilir.önceki.yaz(çizilebilir.güncel);
 		} else
-			çizilebilir.anlık.araDeğer(çizilebilir.önceki, çizilebilir.öbürkü, öncekineUzaklık, öbürküneUzaklık);
+			çizilebilir.anlık
+			.araDeğer(çizilebilir.önceki, çizilebilir.öbürkü, öncekineUzaklık, öbürküneUzaklık)
+			.hazırla();
 	}
 	
 	public abstract void çiz(Çizim çizim);

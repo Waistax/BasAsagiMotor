@@ -10,7 +10,7 @@ import başaşağıderebeyi.girdi.*;
 import java.util.concurrent.*;
 
 public class Motor {
-	public static final String SÜRÜM = "0.25";
+	public static final String SÜRÜM = "0.26";
 	public static final Süreç GÜNCELLEME_SÜRECİ = new Süreç();
 	public static final Süreç ÇİZME_SÜRECİ = new Süreç();
 	

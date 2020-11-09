@@ -9,4 +9,6 @@ public abstract class Çizim {
 	public abstract Çizim yaz(Çizim ç);
 	
 	public abstract Çizim araDeğer(Çizim sol, Çizim sağ, float solaUzaklık, float sağaUzaklık);
+	
+	public abstract Çizim hazırla();
 }

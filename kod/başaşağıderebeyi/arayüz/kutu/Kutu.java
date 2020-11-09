@@ -39,6 +39,12 @@ public class Kutu extends Çizim {
 	}
 	
 	@Override
+	public Çizim hazırla() {
+		d.yuvarla();
+		return this;
+	}
+	
+	@Override
 	public String toString() {
 		return d.toString() + ", " + renk.toString();
 	}
