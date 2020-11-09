@@ -13,12 +13,12 @@ import java.awt.*;
 
 public class KutuÇizer extends Çizer {
 	public final Graphics2D çizer;
-	public final Dikdörtgen2 d;
+	public final Dikdörtgen d;
 	
 	public KutuÇizer(Topluluk topluluk, Graphics2D çizer) {
 		super(topluluk);
 		this.çizer = çizer;
-		d = new Dikdörtgen2();
+		d = new Dikdörtgen();
 	}
 
 	@Override
@@ -27,8 +27,8 @@ public class KutuÇizer extends Çizer {
 		d.yuvarla(kutu.d);
 		çizer.setColor(new Color(kutu.renk.x, kutu.renk.y, kutu.renk.z, kutu.renk.w));
 		çizer.setStroke(new BasicStroke(0.5F));
-		çizer.fillRect((int)d.k.x, (int)d.k.y, (int)(d.b.x - d.k.x), (int)(d.b.y - d.k.y));
+		çizer.fillRect((int)d.k.x, (int)d.k.y, (int)d.ö.x, (int)d.ö.y);
 		çizer.setColor(Color.black);
-		çizer.drawRect((int)d.k.x, (int)d.k.y, (int)(d.b.x - d.k.x), (int)(d.b.y - d.k.y));
+		çizer.drawRect((int)d.k.x, (int)d.k.y, (int)d.ö.x, (int)d.ö.y);
 	}
 }

@@ -15,7 +15,11 @@ public class Vektör4 {
 	}
 	
 	public Vektör4(float x, float y, float z, float w) {
-		yaz(x, y, z, w);
+		yaz(
+				x,
+				y,
+				z,
+				w);
 	}
 	
 	public Vektör4(Vektör4 v) {
@@ -43,15 +47,27 @@ public class Vektör4 {
 	}
 	
 	public Vektör4 yaz(float x, float y, float z, float w) {
-		return yazX(x).yazY(y).yazZ(z).yazW(w);
+		return
+				yazX(x).
+				yazY(y).
+				yazZ(z).
+				yazW(w);
 	}
 	
 	public Vektör4 yaz(Vektör4 v) {
-		return yaz(v.x, v.y, v.z, v.w);
+		return yaz(
+				v.x,
+				v.y,
+				v.z,
+				v.w);
 	}
 	
 	public Vektör4 topla(Vektör4 sol, Vektör4 sağ) {
-		return yaz(sol.x + sağ.x, sol.y + sağ.y, sol.z + sağ.z, sol.w + sağ.w);
+		return yaz(
+				sol.x + sağ.x,
+				sol.y + sağ.y,
+				sol.z + sağ.z,
+				sol.w + sağ.w);
 	}
 	
 	public Vektör4 topla(Vektör4 v) {
@@ -59,7 +75,11 @@ public class Vektör4 {
 	}
 	
 	public Vektör4 çıkar(Vektör4 sol, Vektör4 sağ) {
-		return yaz(sol.x - sağ.x, sol.y - sağ.y, sol.z - sağ.z, sol.w - sağ.w);
+		return yaz(
+				sol.x - sağ.x,
+				sol.y - sağ.y,
+				sol.z - sağ.z,
+				sol.w - sağ.w);
 	}
 	
 	public Vektör4 çıkar(Vektör4 v) {
@@ -67,7 +87,11 @@ public class Vektör4 {
 	}
 	
 	public Vektör4 çarp(Vektör4 sol, float sağ) {
-		return yaz(sol.x * sağ, sol.y * sağ, sol.z * sağ, sol.w * sağ);
+		return yaz(
+				sol.x * sağ,
+				sol.y * sağ,
+				sol.z * sağ,
+				sol.w * sağ);
 	}
 	
 	public Vektör4 çarp(float o) {
@@ -75,7 +99,11 @@ public class Vektör4 {
 	}
 	
 	public Vektör4 böl(Vektör4 sol, float sağ) {
-		return yaz(sol.x / sağ, sol.y / sağ, sol.z / sağ, sol.w / sağ);
+		return yaz(
+				sol.x / sağ,
+				sol.y / sağ,
+				sol.z / sağ,
+				sol.w / sağ);
 	}
 	
 	public Vektör4 böl(float o) {
@@ -83,7 +111,11 @@ public class Vektör4 {
 	}
 	
 	public Vektör4 küçüktür(Vektör4 sol, Vektör4 sağ) {
-		return yaz(sol.x < sağ.x ? sol.x : sağ.x, sol.y < sağ.y ? sol.y : sağ.y, sol.z < sağ.z ? sol.z : sağ.z, sol.w < sağ.w ? sol.w : sağ.w);
+		return yaz(
+				Hesaplayıcı.küçüktür(sol.x, sağ.x),
+				Hesaplayıcı.küçüktür(sol.y, sağ.y),
+				Hesaplayıcı.küçüktür(sol.z, sağ.z),
+				Hesaplayıcı.küçüktür(sol.w, sağ.w));
 	}
 	
 	public Vektör4 küçüktür(Vektör4 v) {
@@ -91,7 +123,11 @@ public class Vektör4 {
 	}
 	
 	public Vektör4 büyüktür(Vektör4 sol, Vektör4 sağ) {
-		return yaz(sol.x > sağ.x ? sol.x : sağ.x, sol.y > sağ.y ? sol.y : sağ.y, sol.z > sağ.z ? sol.z : sağ.z, sol.w > sağ.w ? sol.w : sağ.w);
+		return yaz(
+				Hesaplayıcı.büyüktür(sol.x, sağ.x),
+				Hesaplayıcı.büyüktür(sol.y, sağ.y),
+				Hesaplayıcı.büyüktür(sol.z, sağ.z),
+				Hesaplayıcı.büyüktür(sol.w, sağ.w));
 	}
 	
 	public Vektör4 büyüktür(Vektör4 v) {
@@ -99,7 +135,11 @@ public class Vektör4 {
 	}
 	
 	public Vektör4 sıkıştır(Vektör4 v, Vektör4 alt, Vektör4 üst) {
-		return küçüktür(büyüktür(v, alt), üst);
+		return yaz(
+				Hesaplayıcı.sıkıştır(v.x, alt.x, üst.x),
+				Hesaplayıcı.sıkıştır(v.y, alt.y, üst.y),
+				Hesaplayıcı.sıkıştır(v.z, alt.z, üst.z),
+				Hesaplayıcı.sıkıştır(v.w, alt.w, üst.w));
 	}
 	
 	public Vektör4 sıkıştır(Vektör4 alt, Vektör4 üst) {
@@ -107,7 +147,11 @@ public class Vektör4 {
 	}
 	
 	public Vektör4 yuvarla(Vektör4 v) {
-		return yaz((float)Math.round(v.x), (float)Math.round(v.y), (float)Math.round(v.z), (float)Math.round(v.w));
+		return yaz(
+				Hesaplayıcı.yuvarla(v.x),
+				Hesaplayıcı.yuvarla(v.y),
+				Hesaplayıcı.yuvarla(v.z),
+				Hesaplayıcı.yuvarla(v.w));
 	}
 	
 	public Vektör4 yuvarla() {
@@ -115,7 +159,11 @@ public class Vektör4 {
 	}
 	
 	public Vektör4 tavan(Vektör4 v) {
-		return yaz((float)Math.ceil(v.x), (float)Math.ceil(v.y), (float)Math.ceil(v.z), (float)Math.ceil(v.w));
+		return yaz(
+				Hesaplayıcı.tavan(v.x),
+				Hesaplayıcı.tavan(v.y),
+				Hesaplayıcı.tavan(v.z),
+				Hesaplayıcı.tavan(v.w));
 	}
 	
 	public Vektör4 tavan() {
@@ -123,7 +171,11 @@ public class Vektör4 {
 	}
 	
 	public Vektör4 taban(Vektör4 v) {
-		return yaz((float)Math.floor(v.x), (float)Math.floor(v.y), (float)Math.floor(v.z), (float)Math.floor(v.w));
+		return yaz(
+				Hesaplayıcı.taban(v.x),
+				Hesaplayıcı.taban(v.y),
+				Hesaplayıcı.taban(v.z),
+				Hesaplayıcı.taban(v.w));
 	}
 	
 	public Vektör4 taban() {
@@ -131,7 +183,11 @@ public class Vektör4 {
 	}
 	
 	public Vektör4 araDeğer(Vektör4 sol, Vektör4 sağ, float solaUzaklık, float sağaUzaklık) {
-		return yaz(sol.x * sağaUzaklık + sağ.x * solaUzaklık, sol.y * sağaUzaklık + sağ.y * solaUzaklık, sol.z * sağaUzaklık + sağ.z * solaUzaklık, sol.w * sağaUzaklık + sağ.w * solaUzaklık);
+		return yaz(
+				Hesaplayıcı.araDeğer(sol.x, sağ.x, solaUzaklık, sağaUzaklık),
+				Hesaplayıcı.araDeğer(sol.y, sağ.y, solaUzaklık, sağaUzaklık),
+				Hesaplayıcı.araDeğer(sol.z, sağ.z, solaUzaklık, sağaUzaklık),
+				Hesaplayıcı.araDeğer(sol.w, sağ.w, solaUzaklık, sağaUzaklık));
 	}
 	
 	public Vektör4 araDeğer(Vektör4 v, float uzaklık, float yakınlık) {
@@ -139,7 +195,11 @@ public class Vektör4 {
 	}
 	
 	public float nokta(Vektör4 v) {
-		return x * v.x + y * v.y + z * v.z + w * v.w;
+		return
+				x * v.x +
+				y * v.y +
+				z * v.z +
+				w * v.w;
 	}
 	
 	public float uzunluğunKaresi() {
@@ -147,7 +207,7 @@ public class Vektör4 {
 	}
 	
 	public float uzunluk() {
-		return (float)Math.sqrt(uzunluğunKaresi());
+		return Hesaplayıcı.kökü(uzunluğunKaresi());
 	}
 	
 	public Vektör4 birim(Vektör4 v) {
@@ -159,11 +219,19 @@ public class Vektör4 {
 	}
 	
 	public boolean eşittir(float x, float y, float z, float w) {
-		return this.x == x && this.y == y && this.z == z && this.w == w;
+		return
+				this.x == x &&
+				this.y == y &&
+				this.z == z &&
+				this.w == w;
 	}
 	
 	public boolean eşittir(Vektör4 v) {
-		return eşittir(v.x, v.y, v.z, v.w);
+		return eşittir(
+				v.x,
+				v.y,
+				v.z,
+				v.w);
 	}
 	
 	@Override
@@ -173,6 +241,10 @@ public class Vektör4 {
 	
 	@Override
 	public String toString() {
-		return "(" + x + ", " + y + ", " + z + ", " + w + ")";
+		return "(" +
+				x + ", " +
+				y + ", " +
+				z + ", " +
+				w + ")";
 	}
 }

@@ -1,14 +1,18 @@
 /**
- * başaşağıderebeyi.arayüz.hiza.SerbestHiza.java
+ * başaşağıderebeyi.matematik.hiza.SerbestHiza.java
  * 0.16 / 13 Eyl 2020 / 17:48:47
  * Cem GEÇGEL (BaşAşağıDerebeyi)
  */
-package başaşağıderebeyi.arayüz.hiza;
+package başaşağıderebeyi.matematik.hiza;
 
 import başaşağıderebeyi.matematik.*;
 
 public class SerbestHiza extends Hiza {
 	public float konum;
+
+	public SerbestHiza(DikdörtgenVerisi veri) {
+		super(veri, false, false);
+	}
 	
 	public SerbestHiza yaz(float o) {
 		konum = o;
@@ -24,7 +28,7 @@ public class SerbestHiza extends Hiza {
 	}
 	
 	@Override
-	public void hesapla(Dikdörtgen2 levha) {
-		yön.yaz(hizalama.alan, konum);
+	public void hesapla() {
+		yön.yaz(hedef, konum);
 	}
 }

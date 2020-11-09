@@ -5,18 +5,19 @@
  */
 package başaşağıderebeyi.arayüz;
 
-import başaşağıderebeyi.arayüz.hiza.*;
+import başaşağıderebeyi.matematik.*;
+import başaşağıderebeyi.matematik.hiza.*;
 
 public class PencereÇubuğu extends Öğe {
 	public final String başlık;
 	
 	public PencereÇubuğu(Pencere pencere, String başlık) {
 		super(pencere);
-		hizalama
-		.kx(new SabitHiza())
-		.g(new TersSabitHiza(Pencere.ÇARPI_GENİŞLİĞİ))
-		.ky(new SabitHiza())
-		.y(new SabitBoyutHiza(Pencere.ÇUBUK_YÜKSEKLİĞİ));
+		hizalıDikdörtgen.hepsiniAyarla(
+				new SabitHiza(DikdörtgenVerisi.KÜÇÜK),
+				new TersSabitHiza(DikdörtgenVerisi.BÜYÜK).yaz(Pencere.ÇARPI_GENİŞLİĞİ),
+				new SabitHiza(DikdörtgenVerisi.KÜÇÜK),
+				new SerbestBoyutHiza(Pencere.ÇUBUK_KALINLIĞI));
 		this.başlık = başlık;
 	}
 	
@@ -24,8 +25,8 @@ public class PencereÇubuğu extends Öğe {
 	public void güncelle() {
 		if (Girdi.imleçUygunMu(this) && ekran.tık.aşağı) {
 			odakla();
-			((SerbestHiza)levha.hizalama.hizalar.get(0)).taşı(Girdi.SÜRÜKLEME.x);
-			((SerbestHiza)levha.hizalama.hizalar.get(2)).taşı(Girdi.SÜRÜKLEME.y);
+			((SerbestHiza)levha.hizalıDikdörtgen.hizalar[0]).taşı(Girdi.SÜRÜKLEME.x);
+			((SerbestHiza)levha.hizalıDikdörtgen.hizalar[2]).taşı(Girdi.SÜRÜKLEME.y);
 			levha.hizala();
 		}
 	}

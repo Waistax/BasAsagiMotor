@@ -9,16 +9,16 @@ import başaşağıderebeyi.matematik.*;
 import başaşağıderebeyi.çizer.*;
 
 public class Kutu extends Çizim {
-	public final Dikdörtgen2 d;
+	public final Dikdörtgen d;
 	public final Vektör4 renk;
 
-	public Kutu(Dikdörtgen2 d, Vektör4 renk) {
+	public Kutu(Dikdörtgen d, Vektör4 renk) {
 		this.d = d;
 		this.renk = renk;
 	}
 
 	public Kutu() {
-		this(new Dikdörtgen2(), new Vektör4());
+		this(new Dikdörtgen(), new Vektör4());
 	}
 
 	@Override

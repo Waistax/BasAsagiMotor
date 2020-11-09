@@ -5,10 +5,11 @@
  */
 package başaşağıderebeyi.arayüz;
 
-import başaşağıderebeyi.arayüz.hiza.*;
+import başaşağıderebeyi.matematik.*;
+import başaşağıderebeyi.matematik.hiza.*;
 
 public class Pencere extends Levha {
-	public static final float ÇUBUK_YÜKSEKLİĞİ = 30.0F;
+	public static final float ÇUBUK_KALINLIĞI = 30.0F;
 	public static final float ÇARPI_GENİŞLİĞİ = 50.0F;
 	
 	public final float genişlik;
@@ -20,11 +21,11 @@ public class Pencere extends Levha {
 		super(ekran, null, ekran);
 		this.genişlik = genişlik;
 		this.yükseklik = yükseklik;
-		hizalama
-		.kx(new SerbestHiza().ortala(ekran.hizalama.alan.b.x, genişlik))
-		.bx(new SabitBoyutHiza(genişlik))
-		.by(new SerbestHiza().ortala(ekran.hizalama.alan.b.y, -yükseklik))
-		.ky(new SabitBoyutHiza(yükseklik + ÇUBUK_YÜKSEKLİĞİ));
+		hizalıDikdörtgen.hepsiniAyarla(
+				new SerbestHiza(DikdörtgenVerisi.ORTA).yaz(ekran.alan.o.x),
+				new SerbestBoyutHiza(genişlik),
+				new SerbestHiza(DikdörtgenVerisi.ORTA).yaz(ekran.alan.o.y),
+				new SerbestBoyutHiza(yükseklik));
 		çubuk = new PencereÇubuğu(this, başlık);
 		çarpı = new Düğme(this, "X", new Runnable() {
 			@Override
@@ -32,11 +33,11 @@ public class Pencere extends Levha {
 				ekran.içerik.remove(çarpı.levha);
 			}
 		});
-		çarpı.hizalama
-		.kx(new TersSabitHiza(ÇARPI_GENİŞLİĞİ))
-		.bx(new TersSabitHiza(0.0F))
-		.ky(new SabitHiza(0.0F))
-		.by(new SabitBoyutHiza(ÇUBUK_YÜKSEKLİĞİ));
+		çarpı.hizalıDikdörtgen.hepsiniAyarla(
+				new TersSabitHiza(DikdörtgenVerisi.BÜYÜK),
+				new SerbestBoyutHiza(ÇARPI_GENİŞLİĞİ),
+				new SabitHiza(DikdörtgenVerisi.KÜÇÜK),
+				new SerbestBoyutHiza(ÇUBUK_KALINLIĞI));
 	}
 	
 	@Override

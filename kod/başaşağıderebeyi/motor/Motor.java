@@ -10,7 +10,7 @@ import başaşağıderebeyi.arayüz.*;
 import java.util.concurrent.*;
 
 public class Motor {
-	public static final String SÜRÜM = "0.23";
+	public static final String SÜRÜM = "0.24";
 	public static final Süreç GÜNCELLEME_SÜRECİ = new Süreç();
 	public static final Süreç ÇİZME_SÜRECİ = new Süreç();
 	
@@ -20,8 +20,8 @@ public class Motor {
 	public static Uygulama uygulama;
 	public static float hedefTıkOranı;
 	public static boolean çalışmakta;
-	public static float tıkOranı;
-	public static float kareOranı;
+	public static int tıkOranı;
+	public static int kareOranı;
 	public static float işlenmemişTıklar;
 	
 	public static float zaman() {
@@ -63,8 +63,8 @@ public class Motor {
 				çiz();
 				kareler++;
 				if ((saniyeSayacı += geçenZaman) >= 1.0F) {
-					tıkOranı = tıklar / saniyeSayacı;
-					kareOranı = kareler / saniyeSayacı;
+					tıkOranı = tıklar;
+					kareOranı = kareler;
 					GÜNCELLEME_SÜRECİ.hesapla();
 					ÇİZME_SÜRECİ.hesapla();
 					tıklar = 0;

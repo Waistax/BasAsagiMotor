@@ -5,7 +5,8 @@
  */
 package başaşağıderebeyi.arayüz;
 
-import başaşağıderebeyi.arayüz.hiza.*;
+import başaşağıderebeyi.matematik.*;
+import başaşağıderebeyi.matematik.hiza.*;
 
 public class Ekran extends Levha {
 	public final float genişlik;
@@ -14,11 +15,11 @@ public class Ekran extends Levha {
 	
 	public Ekran(float genişlik, float yükseklik, Tuş tık) {
 		super(null, null, null);
-		hizalama
-		.kx(new SerbestHiza())
-		.ky(new SerbestHiza())
-		.g(new SerbestHiza().yaz(genişlik))
-		.y(new SerbestHiza().yaz(yükseklik));
+		hizalıDikdörtgen.hepsiniAyarla(
+				new SerbestHiza(DikdörtgenVerisi.KÜÇÜK),
+				new SerbestBoyutHiza(genişlik),
+				new SerbestHiza(DikdörtgenVerisi.KÜÇÜK),
+				new SerbestBoyutHiza(yükseklik));
 		hizala();
 		this.genişlik = genişlik;
 		this.yükseklik = yükseklik;
@@ -27,13 +28,6 @@ public class Ekran extends Levha {
 	
 	@Override
 	public void ekle() {
-	}
-	
-	@Override
-	public void hizala() {
-		hizalama.hesapla(null);
-		for (Öğe öğe : içerik)
-			öğe.hizala();
 	}
 	
 	@Override

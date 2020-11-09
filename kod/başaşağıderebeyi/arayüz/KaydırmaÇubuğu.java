@@ -5,7 +5,8 @@
  */
 package başaşağıderebeyi.arayüz;
 
-import başaşağıderebeyi.arayüz.hiza.*;
+import başaşağıderebeyi.matematik.*;
+import başaşağıderebeyi.matematik.hiza.*;
 
 public class KaydırmaÇubuğu extends Öğe {
 	public static final float KALINLIK = 10.0F;
@@ -14,37 +15,36 @@ public class KaydırmaÇubuğu extends Öğe {
 	public final KayanLevha kayanLevha;
 	
 	public KaydırmaÇubuğu(KayanLevha kayanLevha, boolean kenar) {
-		super(kayanLevha.levha);
+		super(kayanLevha.levha.levha);
 		this.kenar = kenar;
 		this.kayanLevha = kayanLevha;
 		if (kenar) {
-			hizalama
-			.kx(new TersSabitHiza(KALINLIK))
-			.bx(new TersSabitHiza(0.0F))
-			.ky(new SabitHiza())
-			.by(new SabitBoyutHiza((float)Math.pow(kayanLevha.görünürHizalama.alan.yükseklik(), 2.0F) / kayanLevha.asılYükseklik));
+			hizalıDikdörtgen.hepsiniAyarla(
+					new TersSabitHiza(DikdörtgenVerisi.BÜYÜK),
+					new SerbestBoyutHiza(KALINLIK),
+					new SabitHiza(DikdörtgenVerisi.KÜÇÜK),
+					new SerbestBoyutHiza());
 		} else {
-			hizalama
-			.ky(new TersSabitHiza(KALINLIK))
-			.by(new TersSabitHiza(0.0F))
-			.kx(new SabitHiza())
-			.bx(new SabitBoyutHiza((float)Math.pow(kayanLevha.görünürHizalama.alan.genişlik(), 2.0F) / kayanLevha.asılGenişlik));
+			hizalıDikdörtgen.hepsiniAyarla(
+					new SabitHiza(DikdörtgenVerisi.KÜÇÜK),
+					new SerbestBoyutHiza(),
+					new TersSabitHiza(DikdörtgenVerisi.BÜYÜK),
+					new SerbestBoyutHiza(KALINLIK));
 		}
 	}
 	
 	@Override
 	public void hizala() {
-		SabitBoyutHiza hiza = (SabitBoyutHiza)hizalama.hizalar.get(3);
-		hiza.yaz((float)Math.pow((kenar
-				? kayanLevha.görünürHizalama.alan.yükseklik()
-				: kayanLevha.görünürHizalama.alan.genişlik())
-				, 2.0F) / (kenar
-				? kayanLevha.asılYükseklik
-				: kayanLevha.asılGenişlik));
-		if (kenar)
-			açık = hiza.boyut < kayanLevha.görünürHizalama.alan.yükseklik();
-		else
-			açık = hiza.boyut < kayanLevha.görünürHizalama.alan.genişlik();
+		if (kenar) {
+			SerbestBoyutHiza hiza = (SerbestBoyutHiza)hizalıDikdörtgen.hizalar[3];
+			hiza.yaz(Hesaplayıcı.karesi(kayanLevha.levha.hizalıDikdörtgen.hedef.ö.y) / kayanLevha.asılYükseklik);
+			açık = hiza.boyut < kayanLevha.levha.hizalıDikdörtgen.hedef.ö.y;
+		}
+		else {
+			SerbestBoyutHiza hiza = (SerbestBoyutHiza)hizalıDikdörtgen.hizalar[1];
+			hiza.yaz(Hesaplayıcı.karesi(kayanLevha.levha.hizalıDikdörtgen.hedef.ö.x) / kayanLevha.asılGenişlik);
+			açık = hiza.boyut < kayanLevha.levha.hizalıDikdörtgen.hedef.ö.x;
+		}
 		super.hizala();
 	}
 	
@@ -52,12 +52,12 @@ public class KaydırmaÇubuğu extends Öğe {
 	public void güncelle() {
 		if (!açıkMı())
 			return;
-		SabitHiza hiza = (SabitHiza)hizalama.hizalar.get(2);
+		SabitHiza hiza = (SabitHiza)hizalıDikdörtgen.hizalar[kenar ? 2 : 0];
 		if (Girdi.tekerlekUygunMu(this) && Girdi.tekerlek != 0) {
 			if (kenar)
-				hiza.taşı(Girdi.tekerlek * kayanLevha.görünürHizalama.alan.yükseklik() * 0.01F);
+				hiza.taşı(Girdi.tekerlek * kayanLevha.levha.hizalıDikdörtgen.hedef.ö.y * 0.01F);
 			else
-				hiza.taşı(Girdi.tekerlek * kayanLevha.görünürHizalama.alan.genişlik() * 0.01F);
+				hiza.taşı(Girdi.tekerlek * kayanLevha.levha.hizalıDikdörtgen.hedef.ö.x * 0.01F);
 			odakla();
 			Girdi.tekerlekKullanıldı(this);
 		}
@@ -66,8 +66,8 @@ public class KaydırmaÇubuğu extends Öğe {
 			odakla();
 		}
 		float enFazlaKayma = kenar
-				? kayanLevha.görünürHizalama.alan.yükseklik() - hizalama.alan.yükseklik()
-				: kayanLevha.görünürHizalama.alan.genişlik() - hizalama.alan.genişlik();
+				? kayanLevha.levha.hizalıDikdörtgen.hedef.ö.y - alan.ö.y
+				: kayanLevha.levha.hizalıDikdörtgen.hedef.ö.x - alan.ö.x;
 		if (hiza.mesafe > enFazlaKayma)
 			hiza.mesafe = enFazlaKayma;
 		if (hiza.mesafe < 0.0F)

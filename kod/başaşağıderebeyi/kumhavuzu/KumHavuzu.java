@@ -6,9 +6,9 @@
 package başaşağıderebeyi.kumhavuzu;
 
 import başaşağıderebeyi.arayüz.*;
-import başaşağıderebeyi.arayüz.hiza.*;
 import başaşağıderebeyi.awtkütüphanesi.*;
 import başaşağıderebeyi.matematik.*;
+import başaşağıderebeyi.matematik.hiza.*;
 import başaşağıderebeyi.motor.*;
 import başaşağıderebeyi.varlık.*;
 
@@ -52,27 +52,28 @@ public class KumHavuzu implements Uygulama {
 //			ekran.pencereAç("Rastgele " + (i + 1), (rastgele.nextInt(6) + 2) * 100, (rastgele.nextInt(6) + 2) * 100);
 //		}
 		kayanLevha = new KayanLevha(pencere, 10000.0F, 10000.0F);
-		kayanLevha.levha.hizalama
-		.kx(new SabitHiza(10.0F))
-		.bx(new OrtaHiza())
-		.ky(new SabitHiza(10.0F + Pencere.ÇUBUK_YÜKSEKLİĞİ))
-		.by(new TersSabitHiza(110.0F));
+		kayanLevha.levha.levha.hizalıDikdörtgen.hepsiniAyarla(
+				new SabitHiza(DikdörtgenVerisi.KÜÇÜK).yaz(10.0F),
+				new OrtaHiza(),
+				new SabitHiza(DikdörtgenVerisi.KÜÇÜK).yaz(10.0F + Pencere.ÇUBUK_KALINLIĞI),
+				new SerbestBoyutHiza(400.0F));
 		Liste liste = new Liste(kayanLevha);
-		liste.hizalama
-		.kx(new SabitHiza(10.0F))
-		.bx(new OrtaHiza())
-		.ky(new SabitHiza(10.0F))
-		.by(new OrtaHiza());
+		liste.hizalıDikdörtgen.hepsiniAyarla(
+				new SabitHiza(DikdörtgenVerisi.KÜÇÜK).yaz(10.0F),
+				new OrtaHiza(),
+				new SabitHiza(DikdörtgenVerisi.KÜÇÜK).yaz(10.0F),
+				new OrtaHiza());
 		görselleştirici.çizer.setFont(new Font("Consolas", Font.PLAIN, 17));
 		ekran.hizala();
 		topluluk = new Topluluk();
 		new KutuÇizer(topluluk, görselleştirici.çizer);
 		new VarlıkListesi(topluluk, liste);
 		new KutuHareket(topluluk);
-		for (int i = 0; i < 3000; i++) {
+		for (int i = 0; i < 30; i++) {
 			Varlık varlık = new Varlık(topluluk);
 			Kutu kutu = (Kutu)new KutuBileşeni(varlık).güncel;
-			kutu.d.yaz(rastgele.nextFloat() * 300.0F, rastgele.nextFloat() * 300.0F, (rastgele.nextFloat() + 1.0F) * 300.0F, (rastgele.nextFloat() + 1.0F) * 300.0F);
+			kutu.d.o.yaz(rastgele.nextFloat() * 300.0F, rastgele.nextFloat() * 300.0F);
+			kutu.d.ö.yaz(rastgele.nextFloat() * 300.0F, rastgele.nextFloat() * 300.0F);
 			kutu.renk.yaz(rastgele.nextFloat(), rastgele.nextFloat(), rastgele.nextFloat(), 1.0F);
 		}
 	}
@@ -96,8 +97,8 @@ public class KumHavuzu implements Uygulama {
 //		} catch (InterruptedException e) {
 //			e.printStackTrace();
 //		}
-		öğeÇiz(ekran);
 		topluluk.çiz();
+		öğeÇiz(ekran);
 		görselleştirici.çizer.setColor(Color.white);
 		görselleştirici.çizer.drawString("Tık: " + Motor.tıkOranı, xkon, 30);
 		görselleştirici.çizer.drawString("Kar: " + Motor.kareOranı, xkon, 50);
@@ -112,7 +113,7 @@ public class KumHavuzu implements Uygulama {
 	public void saniye() {
 	}
 	
-	private void kutuÇiz(Dikdörtgen2 d, Color renk, boolean kalın) {
+	private void kutuÇiz(Dikdörtgen d, Color renk, boolean kalın) {
 		görselleştirici.çizer.setColor(renk);
 		görselleştirici.çizer.setStroke(new BasicStroke(kalın ? 2.0F : 0.5F));
 		görselleştirici.çizer.fillRect((int)d.k.x, (int)d.k.y, (int)(d.b.x - d.k.x), (int)(d.b.y - d.k.y));
@@ -126,44 +127,43 @@ public class KumHavuzu implements Uygulama {
 		float yükseklik = yazıSonu + ölçü.getDescent();
 		if (öğe instanceof Levha) {
 			if (öğe instanceof KayanLevha) {
-				Dikdörtgen2 d = ((KayanLevha)öğe).görünürHizalama.alan;
-				kutuÇiz(d, Color.WHITE, false);
-				görselleştirici.çizer.setClip((int)d.k.x + 1, (int)d.k.y + 1, (int)(d.b.x - d.k.x) - 1, (int)(d.b.y - d.k.y) - 1);
+				görselleştirici.çizer.setClip((int)öğe.levha.alan.k.x + 1, (int)öğe.levha.alan.k.y + 1, (int)öğe.levha.alan.ö.x - 1, (int)öğe.levha.alan.ö.y - 1);
+				kutuÇiz(öğe.levha.alan, Color.GRAY, false);
 			} else if (öğe instanceof Pencere) {
-				kutuÇiz(öğe.hizalama.alan, Color.DARK_GRAY, ekran.içerik.indexOf(öğe) == ekran.içerik.size() - 1);
+				kutuÇiz(öğe.alan, Color.DARK_GRAY, ekran.içerik.indexOf(öğe) == ekran.içerik.size() - 1);
 			}
 			for (Öğe altÖğe : ((Levha)öğe).içerik)
 				öğeÇiz(altÖğe);
 			if (öğe instanceof KayanLevha)
 				görselleştirici.çizer.setClip(null);
 		} else if (öğe instanceof Düğme) {
-			kutuÇiz(öğe.hizalama.alan, öğe.imleçte ? Color.RED : ((Düğme)öğe).basıldı ? Color.GRAY : Color.WHITE, false);
+			kutuÇiz(öğe.alan, öğe.imleçte ? Color.RED : ((Düğme)öğe).basıldı ? Color.GRAY : Color.WHITE, false);
 			görselleştirici.çizer.setColor(öğe.imleçte ? Color.white : Color.black);
 			String yazı = ((Düğme)öğe).yazı;
 			görselleştirici.çizer.drawString(yazı,
-					(öğe.hizalama.alan.b.x + öğe.hizalama.alan.k.x - ölçü.stringWidth(yazı)) / 2.0F,
-					(öğe.hizalama.alan.b.y + öğe.hizalama.alan.k.y + yazıSonu) / 2.0F);
+					(öğe.alan.b.x + öğe.alan.k.x - ölçü.stringWidth(yazı)) / 2.0F,
+					(öğe.alan.b.y + öğe.alan.k.y + yazıSonu) / 2.0F);
 		} else if (öğe instanceof Etiket) {
 			görselleştirici.çizer.setColor(Color.black);
 			String yazı = ((Etiket)öğe).yazı;
 			görselleştirici.çizer.drawString(yazı,
-					öğe.hizalama.alan.k.x,
-					(öğe.hizalama.alan.b.y + öğe.hizalama.alan.k.y + yazıSonu) / 2.0F);
+					öğe.alan.k.x,
+					(öğe.alan.b.y + öğe.alan.k.y + yazıSonu) / 2.0F);
 		} else if (öğe instanceof PencereÇubuğu) {
-			kutuÇiz(öğe.hizalama.alan, Color.WHITE, false);
+			kutuÇiz(öğe.alan, Color.WHITE, false);
 			görselleştirici.çizer.setColor(Color.black);
 			String yazı = ((PencereÇubuğu)öğe).başlık;
 			görselleştirici.çizer.drawString(yazı,
-					öğe.hizalama.alan.k.x + ölçü.charWidth(' '),
-					(öğe.hizalama.alan.b.y + öğe.hizalama.alan.k.y + yazıSonu) / 2.0F);
+					öğe.alan.k.x + ölçü.charWidth(' '),
+					(öğe.alan.b.y + öğe.alan.k.y + yazıSonu) / 2.0F);
 		} else if (öğe instanceof KaydırmaÇubuğu) {
-			kutuÇiz(öğe.hizalama.alan, Color.LIGHT_GRAY, false);
+			kutuÇiz(öğe.alan, Color.LIGHT_GRAY, false);
 		} else if (öğe instanceof Liste) {
 			görselleştirici.çizer.setColor(Color.black);
-			float y = öğe.hizalama.alan.k.y;
+			float y = öğe.alan.k.y;
 			for (String yazı : ((Liste)öğe).yazılar)
 				görselleştirici.çizer.drawString(yazı,
-						öğe.hizalama.alan.k.x,
+						öğe.alan.k.x,
 						y += yükseklik);
 		}
 	}

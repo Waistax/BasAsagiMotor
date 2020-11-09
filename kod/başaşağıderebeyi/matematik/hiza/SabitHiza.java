@@ -1,22 +1,19 @@
 /**
- * başaşağıderebeyi.arayüz.hiza.SabitHiza.java
+ * başaşağıderebeyi.matematik.hiza.SabitHiza.java
  * 0.16 / 13 Eyl 2020 / 18:48:35
  * Cem GEÇGEL (BaşAşağıDerebeyi)
  */
-package başaşağıderebeyi.arayüz.hiza;
+package başaşağıderebeyi.matematik.hiza;
 
 import başaşağıderebeyi.matematik.*;
 
 public class SabitHiza extends Hiza {
 	public float mesafe;
-	
-	public SabitHiza() {
+
+	public SabitHiza(DikdörtgenVerisi veri) {
+		super(veri, false, false);
 	}
-	
-	public SabitHiza(float mesafe) {
-		yaz(mesafe);
-	}
-	
+
 	public SabitHiza yaz(float mesafe) {
 		this.mesafe = mesafe;
 		return this;
@@ -27,7 +24,7 @@ public class SabitHiza extends Hiza {
 	}
 	
 	@Override
-	public void hesapla(Dikdörtgen2 levha) {
-		yön.yaz(hizalama.alan, yön.al(levha.k) + mesafe);
+	public void hesapla() {
+		yön.yaz(hedef, yön.küçük().al(ana) + mesafe);
 	}
 }

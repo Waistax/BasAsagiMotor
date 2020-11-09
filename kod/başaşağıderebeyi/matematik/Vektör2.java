@@ -13,7 +13,9 @@ public class Vektör2 {
 	}
 	
 	public Vektör2(float x, float y) {
-		yaz(x, y);
+		yaz(
+				x,
+				y);
 	}
 	
 	public Vektör2(Vektör2 v) {
@@ -31,15 +33,21 @@ public class Vektör2 {
 	}
 	
 	public Vektör2 yaz(float x, float y) {
-		return yazX(x).yazY(y);
+		return
+				yazX(x).
+				yazY(y);
 	}
 	
 	public Vektör2 yaz(Vektör2 v) {
-		return yaz(v.x, v.y);
+		return yaz(
+				v.x,
+				v.y);
 	}
 	
 	public Vektör2 topla(Vektör2 sol, Vektör2 sağ) {
-		return yaz(sol.x + sağ.x, sol.y + sağ.y);
+		return yaz(
+				sol.x + sağ.x,
+				sol.y + sağ.y);
 	}
 	
 	public Vektör2 topla(Vektör2 v) {
@@ -47,7 +55,9 @@ public class Vektör2 {
 	}
 	
 	public Vektör2 çıkar(Vektör2 sol, Vektör2 sağ) {
-		return yaz(sol.x - sağ.x, sol.y - sağ.y);
+		return yaz(
+				sol.x - sağ.x,
+				sol.y - sağ.y);
 	}
 	
 	public Vektör2 çıkar(Vektör2 v) {
@@ -55,7 +65,9 @@ public class Vektör2 {
 	}
 	
 	public Vektör2 çarp(Vektör2 sol, float sağ) {
-		return yaz(sol.x * sağ, sol.y * sağ);
+		return yaz(
+				sol.x * sağ,
+				sol.y * sağ);
 	}
 	
 	public Vektör2 çarp(float o) {
@@ -63,7 +75,9 @@ public class Vektör2 {
 	}
 	
 	public Vektör2 böl(Vektör2 sol, float sağ) {
-		return yaz(sol.x / sağ, sol.y / sağ);
+		return yaz(
+				sol.x / sağ,
+				sol.y / sağ);
 	}
 	
 	public Vektör2 böl(float o) {
@@ -71,7 +85,9 @@ public class Vektör2 {
 	}
 	
 	public Vektör2 küçüktür(Vektör2 sol, Vektör2 sağ) {
-		return yaz(sol.x < sağ.x ? sol.x : sağ.x, sol.y < sağ.y ? sol.y : sağ.y);
+		return yaz(
+				Hesaplayıcı.küçüktür(sol.x, sağ.x),
+				Hesaplayıcı.küçüktür(sol.y, sağ.y));
 	}
 	
 	public Vektör2 küçüktür(Vektör2 v) {
@@ -79,7 +95,9 @@ public class Vektör2 {
 	}
 	
 	public Vektör2 büyüktür(Vektör2 sol, Vektör2 sağ) {
-		return yaz(sol.x > sağ.x ? sol.x : sağ.x, sol.y > sağ.y ? sol.y : sağ.y);
+		return yaz(
+				Hesaplayıcı.büyüktür(sol.x, sağ.x),
+				Hesaplayıcı.büyüktür(sol.y, sağ.y));
 	}
 	
 	public Vektör2 büyüktür(Vektör2 v) {
@@ -87,7 +105,9 @@ public class Vektör2 {
 	}
 	
 	public Vektör2 sıkıştır(Vektör2 v, Vektör2 alt, Vektör2 üst) {
-		return küçüktür(büyüktür(v, alt), üst);
+		return yaz(
+				Hesaplayıcı.sıkıştır(v.x, alt.x, üst.x),
+				Hesaplayıcı.sıkıştır(v.y, alt.y, üst.y));
 	}
 	
 	public Vektör2 sıkıştır(Vektör2 alt, Vektör2 üst) {
@@ -95,7 +115,9 @@ public class Vektör2 {
 	}
 	
 	public Vektör2 yuvarla(Vektör2 v) {
-		return yaz((float)Math.round(v.x), (float)Math.round(v.y));
+		return yaz(
+				Hesaplayıcı.yuvarla(v.x),
+				Hesaplayıcı.yuvarla(v.y));
 	}
 	
 	public Vektör2 yuvarla() {
@@ -103,7 +125,9 @@ public class Vektör2 {
 	}
 	
 	public Vektör2 tavan(Vektör2 v) {
-		return yaz((float)Math.ceil(v.x), (float)Math.ceil(v.y));
+		return yaz(
+				Hesaplayıcı.tavan(v.x),
+				Hesaplayıcı.tavan(v.x));
 	}
 	
 	public Vektör2 tavan() {
@@ -111,7 +135,9 @@ public class Vektör2 {
 	}
 	
 	public Vektör2 taban(Vektör2 v) {
-		return yaz((float)Math.floor(v.x), (float)Math.floor(v.y));
+		return yaz(
+				Hesaplayıcı.taban(v.x),
+				Hesaplayıcı.taban(v.x));
 	}
 	
 	public Vektör2 taban() {
@@ -119,7 +145,9 @@ public class Vektör2 {
 	}
 	
 	public Vektör2 araDeğer(Vektör2 sol, Vektör2 sağ, float solaUzaklık, float sağaUzaklık) {
-		return yaz(sol.x * sağaUzaklık + sağ.x * solaUzaklık, sol.y * sağaUzaklık + sağ.y * solaUzaklık);
+		return yaz(
+				Hesaplayıcı.araDeğer(sol.x, sağ.x, solaUzaklık, sağaUzaklık),
+				Hesaplayıcı.araDeğer(sol.y, sağ.y, solaUzaklık, sağaUzaklık));
 	}
 	
 	public Vektör2 araDeğer(Vektör2 v, float uzaklık, float yakınlık) {
@@ -127,7 +155,9 @@ public class Vektör2 {
 	}
 	
 	public float nokta(Vektör2 v) {
-		return x * v.x + y * v.y;
+		return
+				x * v.x +
+				y * v.y;
 	}
 	
 	public float uzunluğunKaresi() {
@@ -135,7 +165,7 @@ public class Vektör2 {
 	}
 	
 	public float uzunluk() {
-		return (float)Math.sqrt(uzunluğunKaresi());
+		return Hesaplayıcı.kökü(uzunluğunKaresi());
 	}
 	
 	public Vektör2 birim(Vektör2 v) {
@@ -147,11 +177,15 @@ public class Vektör2 {
 	}
 	
 	public boolean eşittir(float x, float y) {
-		return this.x == x && this.y == y;
+		return
+				this.x == x &&
+				this.y == y;
 	}
 	
 	public boolean eşittir(Vektör2 v) {
-		return eşittir(v.x, v.y);
+		return eşittir(
+				v.x,
+				v.y);
 	}
 	
 	@Override
@@ -161,6 +195,8 @@ public class Vektör2 {
 	
 	@Override
 	public String toString() {
-		return "(" + x + ", " + y + ")";
+		return "(" +
+				x + ", " +
+				y + ")";
 	}
 }

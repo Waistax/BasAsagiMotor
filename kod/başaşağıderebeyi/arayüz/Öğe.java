@@ -5,13 +5,15 @@
  */
 package başaşağıderebeyi.arayüz;
 
-import başaşağıderebeyi.arayüz.hiza.*;
+import başaşağıderebeyi.matematik.*;
+import başaşağıderebeyi.matematik.hiza.*;
 
 public class Öğe {
 	public final Levha levha;
 	public final Pencere pencere;
 	public final Ekran ekran;
-	public final Hizalama hizalama;
+	public final Dikdörtgen alan;
+	public final HizalıDikdörtgen hizalıDikdörtgen;
 	
 	public boolean açık;
 	public boolean üzerinde;
@@ -21,7 +23,8 @@ public class Öğe {
 		this.levha = levha;
 		this.pencere = pencere;
 		this.ekran = ekran;
-		hizalama = new Hizalama();
+		alan = new Dikdörtgen();
+		hizalıDikdörtgen = new HizalıDikdörtgen(levha != null ? levha.alan : null, alan);
 		açık = true;
 		ekle();
 	}
@@ -35,7 +38,7 @@ public class Öğe {
 	}
 	
 	public void hizala() {
-		hizalama.hesapla(levha.hizalama.alan);
+		hizalıDikdörtgen.hizala();
 	}
 	
 	public void odakla() {
@@ -47,7 +50,7 @@ public class Öğe {
 	}
 	
 	public void üzerindeyiHesapla() {
-		üzerinde = levha.üzerinde && hizalama.alan.içinde(Girdi.İMLEÇ);
+		üzerinde = levha.üzerinde && alan.içinde(Girdi.İMLEÇ);
 	}
 	
 	public void imleciHesapla() {
