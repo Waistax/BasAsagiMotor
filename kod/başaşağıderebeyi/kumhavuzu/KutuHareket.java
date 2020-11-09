@@ -5,6 +5,7 @@
  */
 package başaşağıderebeyi.kumhavuzu;
 
+import başaşağıderebeyi.arayüz.kutu.*;
 import başaşağıderebeyi.varlık.*;
 
 public class KutuHareket extends Aile {

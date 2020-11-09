@@ -1,9 +1,9 @@
 /**
- * başaşağıderebeyi.arayüz.Etiket.java
+ * başaşağıderebeyi.arayüz.öğe.Etiket.java
  * 0.16 / 13 Eyl 2020 / 22:06:18
  * Cem GEÇGEL (BaşAşağıDerebeyi)
  */
-package başaşağıderebeyi.arayüz;
+package başaşağıderebeyi.arayüz.öğe;
 
 public class Etiket extends Öğe {
 	public String yazı;

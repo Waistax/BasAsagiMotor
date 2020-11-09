@@ -1,10 +1,11 @@
 /**
- * başaşağıderebeyi.arayüz.Ekran.java
+ * başaşağıderebeyi.arayüz.öğe.Ekran.java
  * 0.16 / 14 Eyl 2020 / 13:29:10
  * Cem GEÇGEL (BaşAşağıDerebeyi)
  */
-package başaşağıderebeyi.arayüz;
+package başaşağıderebeyi.arayüz.öğe;
 
+import başaşağıderebeyi.girdi.*;
 import başaşağıderebeyi.matematik.*;
 import başaşağıderebeyi.matematik.hiza.*;
 

@@ -5,7 +5,7 @@
  */
 package başaşağıderebeyi.awtkütüphanesi;
 
-import başaşağıderebeyi.arayüz.*;
+import başaşağıderebeyi.girdi.*;
 
 import java.awt.event.*;
 

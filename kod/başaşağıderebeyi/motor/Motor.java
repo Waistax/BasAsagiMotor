@@ -5,12 +5,12 @@
  */
 package başaşağıderebeyi.motor;
 
-import başaşağıderebeyi.arayüz.*;
+import başaşağıderebeyi.girdi.*;
 
 import java.util.concurrent.*;
 
 public class Motor {
-	public static final String SÜRÜM = "0.24";
+	public static final String SÜRÜM = "0.25";
 	public static final Süreç GÜNCELLEME_SÜRECİ = new Süreç();
 	public static final Süreç ÇİZME_SÜRECİ = new Süreç();
 	
@@ -19,7 +19,7 @@ public class Motor {
 	public static Görselleştirici görselleştirici;
 	public static Uygulama uygulama;
 	public static float hedefTıkOranı;
-	public static boolean çalışmakta;
+	public static volatile boolean çalışmakta;
 	public static int tıkOranı;
 	public static int kareOranı;
 	public static float işlenmemişTıklar;

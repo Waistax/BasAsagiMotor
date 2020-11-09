@@ -1,9 +1,9 @@
 /**
- * başaşağıderebeyi.arayüz.Tuş.java
+ * başaşağıderebeyi.girdi.Tuş.java
  * 0.20 / 1 Kas 2020 / 16:42:13
  * Cem GEÇGEL (BaşAşağıDerebeyi)
  */
-package başaşağıderebeyi.arayüz;
+package başaşağıderebeyi.girdi;
 
 public class Tuş {
 	public final int kod;
@@ -12,7 +12,7 @@ public class Tuş {
 	public boolean basma;
 	public boolean salma;
 	public boolean girdi;
-	public Öğe hedef;
+	public Object hedef;
 	
 	public Tuş(int kod) {
 		this.kod = kod;
@@ -29,11 +29,11 @@ public class Tuş {
 		return hedef == null;
 	}
 	
-	public boolean uygunMu(Öğe hedef) {
+	public boolean uygunMu(Object hedef) {
 		return boştaMı() || this.hedef == hedef;
 	}
 	
-	public void kullanıldı(Öğe hedef) {
+	public void kullanıldı(Object hedef) {
 		this.hedef = hedef;
 	}
 	

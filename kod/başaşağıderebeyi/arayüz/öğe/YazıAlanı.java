@@ -1,9 +1,9 @@
 /**
- * başaşağıderebeyi.arayüz.YazıAlanı.java
+ * başaşağıderebeyi.arayüz.öğe.YazıAlanı.java
  * 0.11 / 30 Ağu 2020 / 17:31:32
  * Cem GEÇGEL (BaşAşağıDerebeyi)
  */
-package başaşağıderebeyi.arayüz;
+package başaşağıderebeyi.arayüz.öğe;
 
 import başaşağıderebeyi.motor.*;
 

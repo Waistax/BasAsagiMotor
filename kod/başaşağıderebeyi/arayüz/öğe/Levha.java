@@ -1,9 +1,9 @@
 /**
- * başaşağıderebeyi.arayüz.Levha.java
+ * başaşağıderebeyi.arayüz.öğe.Levha.java
  * 0.16 / 14 Eyl 2020 / 16:51:55
  * Cem GEÇGEL (BaşAşağıDerebeyi)
  */
-package başaşağıderebeyi.arayüz;
+package başaşağıderebeyi.arayüz.öğe;
 
 import java.util.*;
 

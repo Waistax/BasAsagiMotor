@@ -5,7 +5,7 @@
  */
 package başaşağıderebeyi.kumhavuzu;
 
-import başaşağıderebeyi.arayüz.*;
+import başaşağıderebeyi.arayüz.öğe.*;
 import başaşağıderebeyi.varlık.*;
 
 public class VarlıkListesi extends Aile {

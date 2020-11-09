@@ -1,9 +1,9 @@
 /**
- * başaşağıderebeyi.arayüz.Liste.java
+ * başaşağıderebeyi.arayüz.öğe.Liste.java
  * 0.19 / 20 Eyl 2020 / 16:02:04
  * Cem GEÇGEL (BaşAşağıDerebeyi)
  */
-package başaşağıderebeyi.arayüz;
+package başaşağıderebeyi.arayüz.öğe;
 
 import java.util.*;
 

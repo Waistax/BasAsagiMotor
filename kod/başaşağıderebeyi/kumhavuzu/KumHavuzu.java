@@ -5,8 +5,10 @@
  */
 package başaşağıderebeyi.kumhavuzu;
 
-import başaşağıderebeyi.arayüz.*;
+import başaşağıderebeyi.arayüz.kutu.*;
+import başaşağıderebeyi.arayüz.öğe.*;
 import başaşağıderebeyi.awtkütüphanesi.*;
+import başaşağıderebeyi.girdi.*;
 import başaşağıderebeyi.matematik.*;
 import başaşağıderebeyi.matematik.hiza.*;
 import başaşağıderebeyi.motor.*;

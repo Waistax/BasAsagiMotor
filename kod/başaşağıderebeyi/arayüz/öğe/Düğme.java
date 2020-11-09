@@ -1,9 +1,11 @@
 /**
- * başaşağıderebeyi.arayüz.Düğme.java
+ * başaşağıderebeyi.arayüz.öğe.Düğme.java
  * 0.16 / 14 Eyl 2020 / 00:35:13
  * Cem GEÇGEL (BaşAşağıDerebeyi)
  */
-package başaşağıderebeyi.arayüz;
+package başaşağıderebeyi.arayüz.öğe;
+
+import başaşağıderebeyi.girdi.*;
 
 public class Düğme extends Öğe {
 	public final String yazı;

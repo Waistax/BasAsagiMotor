@@ -1,9 +1,9 @@
 /**
- * başaşağıderebeyi.arayüz.KayanLevha.java
+ * başaşağıderebeyi.arayüz.öğe.KayanLevha.java
  * 0.17 / 15 Eyl 2020 / 17:03:13
  * Cem GEÇGEL (BaşAşağıDerebeyi)
  */
-package başaşağıderebeyi.arayüz;
+package başaşağıderebeyi.arayüz.öğe;
 
 import başaşağıderebeyi.matematik.*;
 import başaşağıderebeyi.matematik.hiza.*;

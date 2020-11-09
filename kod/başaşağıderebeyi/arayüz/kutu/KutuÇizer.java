@@ -1,9 +1,9 @@
 /**
- * başaşağıderebeyi.kumhavuzu.KutuÇizer.java
+ * başaşağıderebeyi.arayüz.kutu.KutuÇizer.java
  * 0.22 / 4 Kas 2020 / 21:07:45
  * Cem GEÇGEL (BaşAşağıDerebeyi)
  */
-package başaşağıderebeyi.kumhavuzu;
+package başaşağıderebeyi.arayüz.kutu;
 
 import başaşağıderebeyi.matematik.*;
 import başaşağıderebeyi.varlık.*;
