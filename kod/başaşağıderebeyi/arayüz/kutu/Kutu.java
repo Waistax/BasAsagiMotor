@@ -9,11 +9,11 @@ import başaşağıderebeyi.matematik.*;
 import başaşağıderebeyi.çizer.*;
 
 public class Kutu extends Çizim {
-	public final Dikdörtgen d;
+	public final Dikdörtgen alan;
 	public final Vektör4 renk;
 
-	public Kutu(Dikdörtgen d, Vektör4 renk) {
-		this.d = d;
+	public Kutu(Dikdörtgen alan, Vektör4 renk) {
+		this.alan = alan;
 		this.renk = renk;
 	}
 
@@ -24,7 +24,7 @@ public class Kutu extends Çizim {
 	@Override
 	public Çizim yaz(Çizim ç) {
 		Kutu k = (Kutu)ç;
-		d.yaz(k.d);
+		alan.yaz(k.alan);
 		renk.yaz(k.renk);
 		return this;
 	}
@@ -33,19 +33,19 @@ public class Kutu extends Çizim {
 	public Çizim araDeğer(Çizim sol, Çizim sağ, float solaUzaklık, float sağaUzaklık) {
 		Kutu kSol = (Kutu)sol;
 		Kutu kSağ = (Kutu)sağ;
-		d.araDeğer(kSol.d, kSağ.d, solaUzaklık, sağaUzaklık);
+		alan.araDeğer(kSol.alan, kSağ.alan, solaUzaklık, sağaUzaklık);
 		renk.araDeğer(kSol.renk, kSağ.renk, solaUzaklık, sağaUzaklık);
 		return this;
 	}
 	
 	@Override
 	public Çizim hazırla() {
-		d.yuvarla();
+		alan.yuvarla();
 		return this;
 	}
 	
 	@Override
 	public String toString() {
-		return d.toString() + ", " + renk.toString();
+		return alan.toString() + ", " + renk.toString();
 	}
 }

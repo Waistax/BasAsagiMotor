@@ -10,12 +10,4 @@ public enum DikdörtgenVerisi {
 	BÜYÜK,
 	ORTA,
 	ÖLÇÜ;
-	
-	public static final DikdörtgenVerisi[] DEĞERLER = values();
-	
-	public final int sıra;
-
-	private DikdörtgenVerisi() {
-		this.sıra = ordinal();
-	}
 }

@@ -105,9 +105,9 @@ public class Dikdörtgen {
 	
 	@SuppressWarnings("incomplete-switch")
 	public void hesaplaYatay(DikdörtgenVerisi v1, DikdörtgenVerisi v2) {
-		if (v1 == null || v2 == null || v1.sıra == v2.sıra)
+		if (v1 == null || v2 == null || v1.ordinal() == v2.ordinal())
 			return;
-		else if (v1.sıra > v2.sıra) {
+		else if (v1.ordinal() > v2.ordinal()) {
 			DikdörtgenVerisi t = v1;
 			v1 = v2;
 			v2 = t;
@@ -148,9 +148,9 @@ public class Dikdörtgen {
 	
 	@SuppressWarnings("incomplete-switch")
 	public void hesaplaDikey(DikdörtgenVerisi v1, DikdörtgenVerisi v2) {
-		if (v1 == null || v2 == null || v1.sıra == v2.sıra)
+		if (v1 == null || v2 == null || v1 == v2)
 			return;
-		else if (v1.sıra > v2.sıra) {
+		else if (v1.ordinal() > v2.ordinal()) {
 			DikdörtgenVerisi t = v1;
 			v1 = v2;
 			v2 = t;

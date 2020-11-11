@@ -36,23 +36,28 @@ public abstract class Aile {
 	}
 	
 	public void ekle(Varlık varlık) {
-		if (!varlıklar.contains(varlık) && karşılıyorMu(varlık)) {
-			varlıklar.add(varlık);
-			int elemanSayısı = varlıklar.size() / Motor.yürütücüİşlemSayısı;
-			for (AileYürütücü yürütücü : yürütücüler)
-				if (yürütücü.varlıklar.size() <= elemanSayısı) {
-					yürütücü.varlıklar.add(varlık);
-					return;
-				}
-			System.out.println("Eklenmedi! " + elemanSayısı);
-		}
+		if (karşılıyorMu(varlık) && varlıklar.add(varlık))
+			eklendi(varlık);
+	}
+
+	public void eklendi(Varlık varlık) {
+		int elemanSayısı = varlıklar.size() / Motor.yürütücüİşlemSayısı;
+		for (AileYürütücü yürütücü : yürütücüler)
+			if (yürütücü.varlıklar.size() <= elemanSayısı) {
+				yürütücü.varlıklar.add(varlık);
+				return;
+			}
 	}
 	
 	public void çıkar(Varlık varlık) {
 		if (varlıklar.remove(varlık))
-			for (AileYürütücü yürütücü : yürütücüler)
-				if (yürütücü.varlıklar.remove(varlık))
-					return;
+			çıkarıldı(varlık);
+	}
+	
+	public void çıkarıldı(Varlık varlık) {
+		for (AileYürütücü yürütücü : yürütücüler)
+			if (yürütücü.varlıklar.remove(varlık))
+				return;
 	}
 	
 	public void paralelYürüt() {

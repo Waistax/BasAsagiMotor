@@ -8,27 +8,23 @@ package başaşağıderebeyi.matematik.hiza;
 import başaşağıderebeyi.matematik.*;
 
 public enum HizaYönü {
-	KÜÇÜK_YATAY(DikdörtgenVerisi.KÜÇÜK),
-	KÜÇÜK_DİKEY(DikdörtgenVerisi.KÜÇÜK),
-	BÜYÜK_YATAY(DikdörtgenVerisi.BÜYÜK),
-	BÜYÜK_DİKEY(DikdörtgenVerisi.BÜYÜK),
-	ORTA_YATAY(DikdörtgenVerisi.ORTA),
-	ORTA_DİKEY(DikdörtgenVerisi.ORTA),
-	ÖLÇÜ_YATAY(DikdörtgenVerisi.ÖLÇÜ),
-	ÖLÇÜ_DİKEY(DikdörtgenVerisi.ÖLÇÜ);
-	
-	public static final HizaYönü[] DEĞERLER = values();
+	KÜÇÜK_YATAY(),
+	KÜÇÜK_DİKEY(),
+	BÜYÜK_YATAY(),
+	BÜYÜK_DİKEY(),
+	ORTA_YATAY(),
+	ORTA_DİKEY(),
+	ÖLÇÜ_YATAY(),
+	ÖLÇÜ_DİKEY();
 	
 	public static HizaYönü yönüAl(DikdörtgenVerisi dikdörtgenVerisi, boolean yatay) {
-		return DEĞERLER[dikdörtgenVerisi.sıra * 2 + (yatay ? 0 : 1)];
+		return values()[dikdörtgenVerisi.ordinal() * 2 + (yatay ? 0 : 1)];
 	}
 	
-	public final int sıra;
 	public final DikdörtgenVerisi dikdörtgenVerisi;
 	
-	private HizaYönü(DikdörtgenVerisi dikdörtgenVerisi) {
-		sıra = ordinal();
-		this.dikdörtgenVerisi = dikdörtgenVerisi;
+	private HizaYönü() {
+		dikdörtgenVerisi = DikdörtgenVerisi.values()[ordinal() / 2];
 	}
 	
 	public HizaYönü karşı() {
@@ -70,19 +66,19 @@ public enum HizaYönü {
 	}
 	
 	public HizaYönü küçük() {
-		return sıra % 2 == 0 ? KÜÇÜK_YATAY : KÜÇÜK_DİKEY;
+		return ordinal() % 2 == 0 ? KÜÇÜK_YATAY : KÜÇÜK_DİKEY;
 	}
 
 	public HizaYönü büyük() {
-		return sıra % 2 == 0 ? BÜYÜK_YATAY : BÜYÜK_DİKEY;
+		return ordinal() % 2 == 0 ? BÜYÜK_YATAY : BÜYÜK_DİKEY;
 	}
 	
 	public HizaYönü orta() {
-		return sıra % 2 == 0 ? ORTA_YATAY : ORTA_DİKEY;
+		return ordinal() % 2 == 0 ? ORTA_YATAY : ORTA_DİKEY;
 	}
 	
 	public HizaYönü ölçü() {
-		return sıra % 2 == 0 ? ÖLÇÜ_YATAY : ÖLÇÜ_DİKEY;
+		return ordinal() % 2 == 0 ? ÖLÇÜ_YATAY : ÖLÇÜ_DİKEY;
 	}
 	
 	public float al(Dikdörtgen d) {

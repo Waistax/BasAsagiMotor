@@ -26,9 +26,9 @@ public class KutuHareket extends Aile {
 	@Override
 	public void yürüt(Varlık varlık) {
 		Kutu kutu = (Kutu)varlık.bileşen(KutuBileşeni.class).güncel;
-		kutu.d.k.x = ((float)Math.cos(sayaç / 10.0 * kutu.renk.x) + kutu.renk.z) * 100;
-		kutu.d.k.y = ((float)Math.cos(sayaç / 10.0 * kutu.renk.y) + kutu.renk.z) * 100;
-		kutu.d.b.x = kutu.d.k.x * 4;
-		kutu.d.b.y = kutu.d.k.y * 4;
+		kutu.alan.k.x = ((float)Math.cos(sayaç / 10.0 * kutu.renk.x) + kutu.renk.z) * 100;
+		kutu.alan.k.y = ((float)Math.cos(sayaç / 10.0 * kutu.renk.y) + kutu.renk.z) * 100;
+		kutu.alan.b.x = kutu.alan.k.x * 4;
+		kutu.alan.b.y = kutu.alan.k.y * 4;
 	}
 }

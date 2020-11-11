@@ -15,6 +15,7 @@ public class Öğe {
 	public final Ekran ekran;
 	public final Dikdörtgen alan;
 	public final HizalıDikdörtgen hizalıDikdörtgen;
+	public final Vektör4 renk;
 	
 	public boolean açık;
 	public boolean üzerinde;
@@ -26,6 +27,7 @@ public class Öğe {
 		this.ekran = ekran;
 		alan = new Dikdörtgen();
 		hizalıDikdörtgen = new HizalıDikdörtgen(levha != null ? levha.alan : null, alan);
+		renk = new Vektör4();
 		açık = true;
 		ekle();
 	}
